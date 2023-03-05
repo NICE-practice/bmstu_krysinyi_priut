@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
 
-    #service containers to run with `postgres-job`
+    # service containers to run with `postgres-job`
     services:
-     # label used to access the service container
-     postgres:
-       # Docker Hub image
-       image: postgres:latest
-       # service environment variables
-       # `POSTGRES_HOST` is `postgres`
+      # label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:latest
+        # service environment variables
+        # `POSTGRES_HOST` is `postgres`
         env:
           # required
-          POSTGRES_PASSWORD: 1234
+          POSTGRES_PASSWORD: 1830
 
         ports:
           # maps tcp port 5432 on service container to the host
