@@ -51,5 +51,5 @@ jobs:
     - name: Test2
       run: sudo apt install postgresql postgresql-contrib
     - name: Test3
-      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=1234 dbname=shelter_db" -c "SELECT con.* FROM pg_catalog.pg_constraint con INNER JOIN pg_catalog.pg_class rel ON rel.oid = con.conrelid INNER JOIN pg_catalog.pg_namespace nsp  ON nsp.oid = connamespace;"
+      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=1234 dbname=shelter_db" -c "SELECT * FROM shelter_db.public.animals;"
     
