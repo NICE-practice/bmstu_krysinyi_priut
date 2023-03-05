@@ -5,7 +5,6 @@ from faker import Faker
 from faker_vehicle import VehicleProvider
 from random import randint, choice, sample
 import string
-from uuid import uuid4
 from animals import Animals
 
 animal_name_m = []
