@@ -35,7 +35,7 @@ jobs:
     - name: pwd
       run: |
         pwd
-        find /usr/bin -name "ls"
+        /usr/bin/ls -a
         cd db
         pwd
     - name: Chmod
