@@ -38,7 +38,7 @@ jobs:
 
     - name: Install DB
       run: ./install_db_shelter.sh
-      working-directory: db/
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
     - name: Test1
       run: sudo apt update
     - name: Test2
