@@ -1,0 +1,48 @@
+name: Node.js
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+
+    # service containers to run with `postgres-job`
+    services:
+      # label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:latest
+        # service environment variables
+        # `POSTGRES_HOST` is `postgres`
+        env:
+          # required
+          POSTGRES_PASSWORD: 1234
+
+        ports:
+          # maps tcp port 5432 on service container to the host
+          - 5432:5432
+        # set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+   
+    steps:
+
+    - name: Install DB
+      run: ./install_db_shelter.sh
+      working-directory: db/
+    - name: Test1
+      run: sudo apt update
+    - name: Test2
+      run: sudo apt install postgresql postgresql-contrib
+    - name: Test3
+      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=1234 dbname=shelter_db" -c "SELECT con.* FROM pg_catalog.pg_constraint con INNER JOIN pg_catalog.pg_class rel ON rel.oid = con.conrelid INNER JOIN pg_catalog.pg_namespace nsp  ON nsp.oid = connamespace;"
+    
