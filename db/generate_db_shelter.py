@@ -188,7 +188,7 @@ def main_fun():
     connection = psycopg2.connect(database="shelter_db",
                                     user="postgres",
                                     # пароль, который указали при установке PostgreSQL
-                                    password="ira5555",
+                                    password="1234",
                                     host="127.0.0.1",
                                     port="5432")
     connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
