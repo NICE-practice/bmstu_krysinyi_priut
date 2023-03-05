@@ -1,5 +1,8 @@
 name: Node.js
 
+on: [push]
+
+
 jobs:
   build:
 
@@ -30,9 +33,9 @@ jobs:
    
     steps:
     - name: pwd
-      run: pwd
-    - name: testdir
-      run: find /usr/bin -name "ls"
+      run: |
+        cd db
+        pwd
     - name: Chmod
       run: chmod +x ./install_db_shelter.sh
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
