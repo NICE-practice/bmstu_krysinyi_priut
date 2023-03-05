@@ -6,6 +6,6 @@ pip3 install psycopg2
 pip3 install faker_vehicle
 pip3 install faker
 pip3 install random
-pip3 install animals
+pip3 install animals.py
 
 python3 generate_db_shelter.py
