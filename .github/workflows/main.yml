@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
 
-    service containers to run with `postgres-job`
+    #service containers to run with `postgres-job`
     services:
      # label used to access the service container
      postgres:
