@@ -66,6 +66,7 @@ VACCINATIONS = len(vaccination)
 ANIMAL_X_VACCINETION = 2000
 MESSAGE = 1000
 USER = 100
+DONATION = 50
 
 DOG_VAC = 12
 CAT_VAC = 8
@@ -200,6 +201,22 @@ def generate_user_shelter(connection, cursor):
         cursor.execute(sql_insert)
         connection.commit()
 
+
+def generate_donation(connection, cursor):
+    fake = Faker(['ru_RU'])
+    for i in range(DONATION):
+        if (i % 10) == 0:
+            name = fake.name()
+        else:
+            name = "аноним"
+        sum = randint(500, 5000)
+        sql_insert = f"""INSERT INTO donation (donation_id, donation_name, donation_sum) 
+                         VALUES (\'{i + 1}\', \'{name}\', {sum});"""
+        cursor.execute(sql_insert)
+        connection.commit()
+
+
+
 def main_fun():
     try:
     # Подключение к существующей базе данных
@@ -227,6 +244,9 @@ def main_fun():
         print('6')
         generate_user_shelter(connection, cursor)
         print('7')
+        generate_donation(connection, cursor)
+        print('8')
+
 
     except (Exception, Error) as error:
         print("Ошибка при работе с PostgreSQL", error)
