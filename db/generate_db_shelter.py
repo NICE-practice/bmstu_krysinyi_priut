@@ -5,7 +5,6 @@ from faker import Faker
 from faker_vehicle import VehicleProvider
 from random import randint, choice, sample
 import string
-from uuid import uuid4
 from animals import Animals
 
 animal_name_m = []
@@ -43,6 +42,21 @@ vaccination = vaccination.split('\n')
 vaccination = vaccination[:-1]
 
 
+history = []
+with open('history_animal.txt') as f:
+    history = f.read()
+history = history.split('\n')
+history = history[:-1]
+
+
+text_message = []
+with open('text_message.txt') as f:
+    text_message = f.read()
+text_message = text_message.split('\n')
+text_message = text_message[:-1]
+
+
+
 PRIVILEGE = ['admin', 'operator', 'content-menegere']
 
 BREED_DOG = len(breed_dog)
@@ -52,6 +66,7 @@ VACCINATIONS = len(vaccination)
 ANIMAL_X_VACCINETION = 2000
 MESSAGE = 1000
 USER = 100
+DONATION = 50
 
 DOG_VAC = 12
 CAT_VAC = 8
@@ -66,7 +81,8 @@ def generate_animals(connection, cursor):
         name = animal_name_m[i]
         sex = "м"
         age = randint(1, 20)
-        history = "history"
+        j = randint(0, 4)
+        history_a = history[j]
         if (id % 2 == 0):
             breed = breed_dog[randint(0, BREED_DOG - 1)]
             animal = Animals('dog')
@@ -79,7 +95,7 @@ def generate_animals(connection, cursor):
             img = animal.image()
         flag = 0
         sql_insert = f"""INSERT INTO animal (animal_id, animal_type, animal_name, animal_sex, animal_age, animal_history, animal_breed, animal_img, delete_flag) 
-                         VALUES ({id}, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history}\', \'{breed}\', \'{img}\',  \'{flag}\');"""
+                         VALUES ({id}, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -90,7 +106,8 @@ def generate_animals(connection, cursor):
         name = animal_name_w[i]
         sex = "ж"
         age = randint(1, 20)
-        history = "history"
+        j = randint(0, 4)
+        history_a = history[j]
         if (id % 2 == 0):
             breed = breed_dog[randint(0, BREED_DOG - 1)]
             animal = Animals('dog')
@@ -103,7 +120,7 @@ def generate_animals(connection, cursor):
             img = animal.image()
         flag = 0
         sql_insert = f"""INSERT INTO animal (animal_id, animal_type, animal_name, animal_sex, animal_age, animal_history, animal_breed, animal_img, delete_flag) 
-                         VALUES ({id}, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history}\', \'{breed}\', \'{img}\',  \'{flag}\');"""
+                         VALUES ({id}, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -140,7 +157,8 @@ def generate_message(connection, cursor):
         for j in range(10):
             phone += str(randint(0, 9))
         email = fake.email()
-        text = "text"
+        j = randint(0, 7)
+        text = text_message[j]
         pre = choice(['телефон', 'email'])
         flag = 0
         sql_insert = f"""INSERT INTO message (message_id, message_name, phone, email, message_text, preferred_contact_method, answer_flag) 
@@ -183,39 +201,55 @@ def generate_user_shelter(connection, cursor):
         cursor.execute(sql_insert)
         connection.commit()
 
+
+def generate_donation(connection, cursor):
+    fake = Faker(['ru_RU'])
+    for i in range(DONATION):
+        if (i % 10) == 0:
+            name = fake.name()
+        else:
+            name = "аноним"
+        sum = randint(500, 5000)
+        sql_insert = f"""INSERT INTO donation (donation_id, donation_name, donation_sum) 
+                         VALUES (\'{i + 1}\', \'{name}\', {sum});"""
+        cursor.execute(sql_insert)
+        connection.commit()
+
+
+
 def main_fun():
-    # try:
+    try:
     # Подключение к существующей базе данных
-    connection = psycopg2.connect(database="shelter_db",
-                                    user="postgres",
-                                    # пароль, который указали при установке PostgreSQL
-                                    password="ira5555",
-                                    host="127.0.0.1",
-                                    port="5432")
-    connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-    # Курсор для выполнения операций с базой данных
-    cursor = connection.cursor()
+        connection = psycopg2.connect(database="shelter_db",
+                                        user="postgres",
+                                        # пароль, который указали при установке PostgreSQL
+                                        password="1234",
+                                        host="127.0.0.1",
+                                        port="5432")
+        connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+        # Курсор для выполнения операций с базой данных
+        cursor = connection.cursor()
 
-    generate_animals(connection, cursor)
-    print('1')
-    generate_vaccination(connection, cursor)
-    print('2')
-    generate_animal_x_vaccination(connection, cursor)
-    print('3')
-    generate_message(connection, cursor)
-    print('4')
-    generate_info_shelter(connection, cursor)
-    print('5')
-    generate_dict_privilege(connection, cursor)
-    print('6')
-    generate_user_shelter(connection, cursor)
-    print('7')
+        generate_animals(connection, cursor)
+        print('1')
+        generate_vaccination(connection, cursor)
+        print('2')
+        generate_animal_x_vaccination(connection, cursor)
+        print('3')
+        generate_message(connection, cursor)
+        print('4')
+        generate_info_shelter(connection, cursor)
+        print('5')
+        generate_dict_privilege(connection, cursor)
+        print('6')
+        generate_user_shelter(connection, cursor)
+        print('7')
+        generate_donation(connection, cursor)
+        print('8')
 
 
-
-
-    # except (Exception, Error) as error:
-    #     print("Ошибка при работе с PostgreSQL", error)
+    except (Exception, Error) as error:
+        print("Ошибка при работе с PostgreSQL", error)
 
 
 

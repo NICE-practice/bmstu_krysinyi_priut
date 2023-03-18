@@ -82,3 +82,10 @@ CREATE TABLE IF NOT EXISTS user_shelter(
 
 
 
+-- 8. Таблица донатов
+DROP TABLE IF EXISTS donation;
+CREATE TABLE IF NOT EXISTS donation(
+	donation_id SERIAL NOT NULL PRIMARY KEY,
+	donation_name VARCHAR(100),
+	donation_sum INTEGER
+);
