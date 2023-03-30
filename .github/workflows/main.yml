@@ -50,5 +50,5 @@ jobs:
     - name: Test2
       run: sudo apt install postgresql postgresql-contrib
     - name: Test3
-      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=1234 dbname=shelter_db" -c "SELECT * FROM shelter_db.public.animal;"
+      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=$POSTGRES_PASSWORD dbname=shelter_db" -c "SELECT * FROM shelter_db.public.animal;"
     
