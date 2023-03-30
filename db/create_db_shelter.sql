@@ -1,5 +1,5 @@
---DROP database IF EXISTS shelter_db;
---CREATE database shelter_db;
+DROP database IF EXISTS shelter_db;
+CREATE database shelter_db;
 
 
 \c shelter_db;
