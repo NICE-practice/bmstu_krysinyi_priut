@@ -64,7 +64,7 @@ BREED_DOG = len(breed_dog)
 BREED_CAT = len(breed_cat)
 ANIMALS = len(animal_name_m) + len(animal_name_w)
 VACCINATIONS = len(vaccination)
-ANIMAL_X_VACCINETION = 2000
+ANIMAL_X_VACCINETION = 200
 MESSAGE = 1000
 USER = 100
 DONATION = 50
@@ -76,7 +76,7 @@ def generate_animals(connection, cursor):
     fake = Faker()#['ru_RU'])
     f = Faker()
     id = 0
-    for i in range(2): #len(animal_name_m) 
+    for i in range(200): #len(animal_name_m) 
         print(i)
         id += 1
         name = animal_name_m[i]
@@ -97,12 +97,12 @@ def generate_animals(connection, cursor):
         flag = 0
         s_date = str(datetime.datetime.now())
         sql_insert = f"""INSERT INTO \"animals\" (\"animalId\",\"animalType\",\"animalName\",\"animalSex\",\"animalAge\",\"animalHistory\",\"animalBreed\",\"animalImg\",\"deleteFlag\",\"createdAt\",\"updatedAt\")
-                         VALUES ({id}, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\', \'{s_date}\', \'{s_date}\');"""
+                         VALUES (DEFAULT, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\', \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
 
-    for i in range(2): #len(animal_name_w)
+    for i in range(200): #len(animal_name_w)
         print(i)
         id += 1
         name = animal_name_w[i]
@@ -123,7 +123,7 @@ def generate_animals(connection, cursor):
         flag = 0
         s_date = str(datetime.datetime.now())
         sql_insert = f"""INSERT INTO \"animals\" (\"animalId\",\"animalType\",\"animalName\",\"animalSex\",\"animalAge\",\"animalHistory\",\"animalBreed\",\"animalImg\",\"deleteFlag\",\"createdAt\",\"updatedAt\")
-                         VALUES ({id}, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\', \'{s_date}\', \'{s_date}\');"""
+                         VALUES (DEFAULT, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\', \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -133,7 +133,7 @@ def generate_vaccination(connection, cursor):
         name = vaccination[i]
         s_date = str(datetime.datetime.now())
         sql_insert = f"""INSERT INTO \"vaccinations\" (\"vaccinationId\", \"vaccinationName\",\"createdAt\",\"updatedAt\")
-                         VALUES ({i+1}, \'{name}\');"""
+                         VALUES (DEFAULT, \'{name}\', \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -149,7 +149,7 @@ def generate_animal_x_vaccination(connection, cursor):
         date = str(fake.date_this_decade())
         s_date = str(datetime.datetime.now())
         sql_insert = f"""INSERT INTO \"animal_x_vaccinations\" (\"animalVaccinationId\", \"animalAnimalId\", \"vaccinationVaccinationId\", \"vaccinationDate\",\"createdAt\",\"updatedAt\")
-                         VALUES ({i+1}, {animal_id}, {vac_id}, \'{date}\', \'{s_date}\', \'{s_date}\');"""
+                         VALUES (DEFAULT, {animal_id}, {vac_id}, \'{date}\', \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -167,8 +167,8 @@ def generate_message(connection, cursor):
         pre = choice(['телефон', 'email'])
         flag = 0
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO messages (messageId, messageName, phone, email, message_text, preferred_contact_method, answer_flag,\"createdAt\",\"updatedAt\")
-                         VALUES ({i+1}, \'{name}\', \'{phone}\', \'{email}\', \'{text}\', \'{pre}\', \'{flag}\', \'{s_date}\', \'{s_date}\');"""
+        sql_insert = f"""INSERT INTO \"messages\" (\"messageId\", \"messageName\", \"phone\", \"email\", \"messageText\", \"preferredContactMethod\", \"answerFlag\",\"createdAt\",\"updatedAt\")
+                         VALUES (DEFAULT, \'{name}\', \'{phone}\', \'{email}\', \'{text}\', \'{pre}\', \'{flag}\', \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -179,8 +179,8 @@ def generate_info_shelter(connection, cursor):
     phone = "+7-895-923-25-54"
     email = "iva@iva.shelter.com"
     s_date = str(datetime.datetime.now())
-    sql_insert = f"""INSERT INTO info_shelter (shelter_address, shelter_phone, shelter_email,\"createdAt\",\"updatedAt\")
-                        VALUES (\'{address}\', \'{phone}\', \'{email}\', \'{s_date}\', \'{s_date}\');"""
+    sql_insert = f"""INSERT INTO \"info_shelters\" (\"id\", \"shelter_address\", \"shelter_phone\", \"shelter_email\",\"createdAt\",\"updatedAt\")
+                        VALUES (DEFAULT, \'{address}\', \'{phone}\', \'{email}\', \'{s_date}\', \'{s_date}\');"""
     cursor.execute(sql_insert)
     connection.commit()
 
@@ -189,7 +189,7 @@ def generate_dict_privilege(connection, cursor):
     fake = Faker(['ru_RU'])
     for i in range(len(PRIVILEGE)):
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO dict_privilege (priv_id, priv_name,\"createdAt\",\"updatedAt\")
+        sql_insert = f"""INSERT INTO \"dict_privileges\" (\"privId\", \"privName\",\"createdAt\",\"updatedAt\")
                          VALUES (\'{i + 1}\', \'{PRIVILEGE[i]}\', \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
@@ -205,8 +205,8 @@ def generate_user_shelter(connection, cursor):
         check = ''.join(choice(chars) for _ in range(10))
         priv = choice([i + 1 for i in range(len(PRIVILEGE))])
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO user_shelter (user_id, user_fio, user_login, user_check, user_privilege,\"createdAt\",\"updatedAt\")
-                         VALUES ({i + 1}, \'{name}\', \'{login}\', \'{check}\', {priv}, \'{s_date}\', \'{s_date}\');"""
+        sql_insert = f"""INSERT INTO \"user_shelters\" (\"userId\", \"userFIO\", \"userLogin\", \"userCheck\", \"dictPrivilegePrivId\",\"createdAt\",\"updatedAt\")
+                         VALUES (DEFAULT, \'{name}\', \'{login}\', \'{check}\', {priv}, \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -220,8 +220,8 @@ def generate_donation(connection, cursor):
             name = "аноним"
         sum = randint(500, 5000)
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO donation (donation_id, donation_name, donation_sum,\"createdAt\",\"updatedAt\")
-                         VALUES (\'{i + 1}\', \'{name}\', {sum}, \'{s_date}\', \'{s_date}\');"""
+        sql_insert = f"""INSERT INTO \"donations\" (\"donationId\", \"donationName\", \"donationSum\",\"createdAt\",\"updatedAt\")
+                         VALUES (DEFAULT, \'{name}\', {sum}, \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
 
@@ -242,20 +242,20 @@ def main_fun():
 
         generate_animals(connection, cursor)
         print('1')
-        # generate_vaccination(connection, cursor)
+        generate_vaccination(connection, cursor)
         print('2')
-        # generate_animal_x_vaccination(connection, cursor)
-        # print('3')
-        # generate_message(connection, cursor)
-        # print('4')
-        # generate_info_shelter(connection, cursor)
-        # print('5')
-        # generate_dict_privilege(connection, cursor)
-        # print('6')
-        # generate_user_shelter(connection, cursor)
-        # print('7')
-        # generate_donation(connection, cursor)
-        # print('8')
+        generate_animal_x_vaccination(connection, cursor)
+        print('3')
+        generate_message(connection, cursor)
+        print('4')
+        generate_info_shelter(connection, cursor)
+        print('5')
+        generate_dict_privilege(connection, cursor)
+        print('6')
+        generate_user_shelter(connection, cursor)
+        print('7')
+        generate_donation(connection, cursor)
+        print('8')
 
 
     except (Exception, Error) as error:
