@@ -18,8 +18,7 @@ jobs:
         # `POSTGRES_HOST` is `postgres`
         env:
           # required
-          POSTGRES_PASSWORD: 1234
-
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           # maps tcp port 5432 on service container to the host
           - 5432:5432
@@ -43,7 +42,7 @@ jobs:
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
     - name: Install DB
-      run: ./install_db_shelter.sh
+      run: ./install_db_shelter.sh "$POSTGRES_PASSWORD"
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
     - name: Test1
