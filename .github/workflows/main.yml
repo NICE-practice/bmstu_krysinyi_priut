@@ -39,13 +39,13 @@ jobs:
         pwd
     - name: Chmod
       run: chmod +x ./install_db_shelter.sh
-      working-directory: /home/runner/work/dr-td/dr-td/db
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
     - name: Install DB
       env:
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       run: ./install_db_shelter.sh $POSTGRES_PASSWORD
-      working-directory: /home/runner/work/dr-td/dr-td/db
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
     - name: Test1
       run: sudo apt update
