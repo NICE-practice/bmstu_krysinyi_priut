@@ -2,11 +2,11 @@ import psycopg2
 from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from faker import Faker
-from faker_vehicle import VehicleProvider
-from random import randint, choice, sample
+from random import randint, choice
 import string
 from animals import Animals
 import datetime
+import sys
 
 animal_name_m = []
 with open('name_m.txt', encoding="utf-8") as f:
@@ -229,11 +229,12 @@ def generate_donation(connection, cursor):
 
 def main_fun():
     try:
-    # Подключение к существующей базе данных
+        password = str(sys.argv[1])
+        # Подключение к существующей базе данных
         connection = psycopg2.connect(database="shelter_db",
                                         user="postgres",
                                         # пароль, который указали при установке PostgreSQL
-                                        password="1234",
+                                        password=password,
                                         host="127.0.0.1",
                                         port="5432")
         connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)

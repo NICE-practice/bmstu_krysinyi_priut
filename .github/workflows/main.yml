@@ -39,16 +39,20 @@ jobs:
         pwd
     - name: Chmod
       run: chmod +x ./install_db_shelter.sh
-      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
+      working-directory: /home/runner/work/dr-td/dr-td/db
       shell: bash
     - name: Install DB
-      run: ./install_db_shelter.sh "$POSTGRES_PASSWORD"
-      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
+      env:
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      run: ./install_db_shelter.sh $POSTGRES_PASSWORD
+      working-directory: /home/runner/work/dr-td/dr-td/db
       shell: bash
     - name: Test1
       run: sudo apt update
     - name: Test2
       run: sudo apt install postgresql postgresql-contrib
     - name: Test3
-      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=$POSTGRES_PASSWORD dbname=shelter_db" -c "SELECT * FROM shelter_db.public.animal;"
+      env:
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=$POSTGRES_PASSWORD dbname=shelter_db" -c "SELECT * FROM \"shelter_db\".\"public\".\"animals\";"
     
