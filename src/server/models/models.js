@@ -50,7 +50,7 @@ const InfoShelter = sequelize.define('info_shelter', {
 
 
 const DictPrivelege = sequelize.define('dict_privilege', {
-    privID: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    privId: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     privName: {type: DataTypes.STRING, allowNull: false},
     
 })
