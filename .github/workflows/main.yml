@@ -18,8 +18,7 @@ jobs:
         # `POSTGRES_HOST` is `postgres`
         env:
           # required
-          POSTGRES_PASSWORD: 1234
-
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           # maps tcp port 5432 on service container to the host
           - 5432:5432
@@ -43,7 +42,9 @@ jobs:
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
     - name: Install DB
-      run: ./install_db_shelter.sh
+      env:
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      run: ./install_db_shelter.sh $POSTGRES_PASSWORD
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
     - name: Test1
@@ -51,5 +52,7 @@ jobs:
     - name: Test2
       run: sudo apt install postgresql postgresql-contrib
     - name: Test3
-      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=1234 dbname=shelter_db" -c "SELECT * FROM shelter_db.public.animal;"
+      env:
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=$POSTGRES_PASSWORD dbname=shelter_db" -c "SELECT * FROM \"shelter_db\".\"public\".\"animals\";"
     
