@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-base",
+        "plugin:jsx-a11y/recommended",
+        "plugin:import/recommended",
+        "prettier"
+    ],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "no-restricted-syntax":"off",
+        "no-await-in-loop":"off",
+        "class-methods-use-this": "off",
+        "no-plusplus":"off",
+        "consistent-return":"off"
+    }
+}
