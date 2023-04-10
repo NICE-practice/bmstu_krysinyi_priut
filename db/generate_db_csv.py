@@ -1,12 +1,21 @@
-import psycopg2
-from psycopg2 import Error
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+import csv
+
 from faker import Faker
 from random import randint, choice
 import string
 from animals import Animals
 import datetime
-import sys
+
+
+    
+def generateAlcoholTypes():
+    f = open('AlcoholTypes.csv', 'w')
+    for i in range(len(alcoholTypes)):
+        line = "{0};{1}\n".format(alcoholTypes[i]["name"], alcoholTypes[i]["strength"])
+        f.write(line)
+    f.close()
+    
+
 
 animal_name_m = []
 with open('./insert/name_m.txt', encoding="utf-8") as f:
@@ -57,6 +66,7 @@ text_message = text_message.split('\n')
 text_message = text_message[:-1]
 
 
+
 PRIVILEGE = ['admin', 'operator', 'content-menegere']
 
 BREED_DOG = len(breed_dog)
@@ -71,9 +81,19 @@ DONATION = 50
 DOG_VAC = 12
 CAT_VAC = 8
 
+
+DONATIONS_FILE = './data/donations.csv'
+USER_SHELTERS_FILE = './data/user_shelters.csv'
+DICT_PRIVILEGES_FILE = './data/dict_privileges.csv'
+ANIMAL_X_VAC_FILE = './data/animal_x_vaccinations.csv'
+MESSAGES_FILE = './data/messages.csv'
+VACCNATIONS_FILE = './data/vaccinations.csv'
+ANIMAL_FILE = './data/animals.csv'
+INFO_SHELTER_FILE = './data/info_shelters.csv'
+
 def generate_animals(connection, cursor):
-    fake = Faker()#['ru_RU'])
-    f = Faker()
+    f = open('AlcoholTypes.csv', 'w')
+ 
     id = 0
     for i in range(200): #len(animal_name_m) 
         print(i)
@@ -95,10 +115,9 @@ def generate_animals(connection, cursor):
             img = animal.image()
         flag = 0
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"animals\" (\"animalId\",\"animalType\",\"animalName\",\"animalSex\",\"animalAge\",\"animalHistory\",\"animalBreed\",\"animalImg\",\"deleteFlag\",\"createdAt\",\"updatedAt\")
-                         VALUES (DEFAULT, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\', \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
+
+        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        f.write(line)
 
 
     for i in range(200): #len(animal_name_w)
@@ -121,10 +140,9 @@ def generate_animals(connection, cursor):
             img = animal.image()
         flag = 0
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"animals\" (\"animalId\",\"animalType\",\"animalName\",\"animalSex\",\"animalAge\",\"animalHistory\",\"animalBreed\",\"animalImg\",\"deleteFlag\",\"createdAt\",\"updatedAt\")
-                         VALUES (DEFAULT, \'{type}\', \'{name}\', \'{sex}\', {age}, \'{history_a}\', \'{breed}\', \'{img}\',  \'{flag}\', \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
+        
+        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        f.write(line)
 
 
 def generate_vaccination(connection, cursor):
@@ -135,6 +153,9 @@ def generate_vaccination(connection, cursor):
                          VALUES (DEFAULT, \'{name}\', \'{s_date}\', \'{s_date}\');"""
         cursor.execute(sql_insert)
         connection.commit()
+
+        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        f.write(line)
 
 
 def generate_animal_x_vaccination(connection, cursor):
@@ -228,18 +249,6 @@ def generate_donation(connection, cursor):
 
 def main_fun():
     try:
-        password = str(sys.argv[1])
-        # Подключение к существующей базе данных
-        connection = psycopg2.connect(database="shelter_db",
-                                        user="postgres",
-                                        # пароль, который указали при установке PostgreSQL
-                                        password=password,
-                                        host="127.0.0.1",
-                                        port="5432")
-        connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-        # Курсор для выполнения операций с базой данных
-        cursor = connection.cursor()
-
         generate_animals(connection, cursor)
         print('1')
         generate_vaccination(connection, cursor)
