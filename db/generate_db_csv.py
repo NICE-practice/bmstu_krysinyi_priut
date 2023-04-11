@@ -85,7 +85,8 @@ ANIMAL_FILE = './data/animals.csv'
 INFO_SHELTER_FILE = './data/info_shelters.csv'
 
 def generate_animals():
-    f = open(DONATIONS_FILE, 'w')
+    
+    f = open(ANIMAL_FILE, 'w')
  
     id = 0
     for i in range(30): #len(animal_name_m) 
@@ -109,7 +110,7 @@ def generate_animals():
         flag = 0
         s_date = str(datetime.datetime.now())
 
-        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}\n".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        line = "{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}\n".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
         f.write(line)
 
 
@@ -134,7 +135,7 @@ def generate_animals():
         flag = 0
         s_date = str(datetime.datetime.now())
         
-        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}\n".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        line = "{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}\n".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
         f.write(line)
     f.close()
 
@@ -182,7 +183,7 @@ def generate_message():
         flag = 0
         s_date = str(datetime.datetime.now())
 
-        line = "{0};{1};{2};{3};{4}\n".format(name, phone, email, text, pre, flag, s_date, s_date)
+        line = "{0};{1};{2};{3};{4};{5};{6};{7}\n".format(name, phone, email, text, pre, flag, s_date, s_date)
         f.write(line)
     f.close()
 
@@ -199,17 +200,18 @@ def generate_info_shelter():
     f.close()
 
 
-def generate_dict_privilege(connection, cursor):
-    fake = Faker(['ru_RU'])
+def generate_dict_privilege():
+    f = open(DICT_PRIVILEGES_FILE, 'w')
     for i in range(len(PRIVILEGE)):
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"dict_privileges\" (\"privId\", \"privName\",\"createdAt\",\"updatedAt\")
-                         VALUES (\'{i + 1}\', \'{PRIVILEGE[i]}\', \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
+
+        line = "{0};{1};{2}\n".format(PRIVILEGE[i], s_date, s_date)
+        f.write(line)
+    f.close()
 
 
-def generate_user_shelter(connection, cursor):
+def generate_user_shelter():
+    f = open(USER_SHELTERS_FILE, 'w')
     chars=string.ascii_uppercase + string.digits
     fake = Faker(['ru_RU'])
     for i in range(USER):
@@ -219,13 +221,15 @@ def generate_user_shelter(connection, cursor):
         check = ''.join(choice(chars) for _ in range(10))
         priv = choice([i + 1 for i in range(len(PRIVILEGE))])
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"user_shelters\" (\"userId\", \"userFIO\", \"userLogin\", \"userCheck\", \"dictPrivilegePrivId\",\"createdAt\",\"updatedAt\")
-                         VALUES (DEFAULT, \'{name}\', \'{login}\', \'{check}\', {priv}, \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
 
 
-def generate_donation(connection, cursor):
+        line = "{0};{1};{2};{3};{4};{5}\n".format(name, login, check, priv, s_date, s_date)
+        f.write(line)
+    f.close()
+
+
+def generate_donation():
+    f = open(DONATIONS_FILE, 'w')
     fake = Faker(['ru_RU'])
     for i in range(DONATION):
         if (i % 10) == 0:
@@ -234,16 +238,17 @@ def generate_donation(connection, cursor):
             name = "аноним"
         sum = randint(500, 5000)
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"donations\" (\"donationId\", \"donationName\", \"donationSum\",\"createdAt\",\"updatedAt\")
-                         VALUES (DEFAULT, \'{name}\', {sum}, \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
+
+
+        line = "{0};{1};{2};{3}\n".format(name, sum, s_date, s_date)
+        f.write(line)
+    f.close()
 
 
 
 def main_fun():
 
-    # generate_animals()
+    generate_animals()
     print('1')
     # generate_vaccination()
     print('2')
@@ -252,13 +257,13 @@ def main_fun():
     # generate_message()
     print('4')
     # generate_info_shelter()
-    # print('5')
-    generate_dict_privilege()
-    # print('6')
+    print('5')
+    # generate_dict_privilege()
+    print('6')
     # generate_user_shelter()
-    # print('7')
-    # generate_donation()
-    # print('8')
+    print('7')
+    generate_donation()
+    print('8')
 
 
 
