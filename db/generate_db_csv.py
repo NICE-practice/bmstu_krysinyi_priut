@@ -7,14 +7,7 @@ from animals import Animals
 import datetime
 
 
-    
-def generateAlcoholTypes():
-    f = open('AlcoholTypes.csv', 'w')
-    for i in range(len(alcoholTypes)):
-        line = "{0};{1}\n".format(alcoholTypes[i]["name"], alcoholTypes[i]["strength"])
-        f.write(line)
-    f.close()
-    
+
 
 
 animal_name_m = []
@@ -91,11 +84,11 @@ VACCNATIONS_FILE = './data/vaccinations.csv'
 ANIMAL_FILE = './data/animals.csv'
 INFO_SHELTER_FILE = './data/info_shelters.csv'
 
-def generate_animals(connection, cursor):
-    f = open('AlcoholTypes.csv', 'w')
+def generate_animals():
+    f = open(DONATIONS_FILE, 'w')
  
     id = 0
-    for i in range(200): #len(animal_name_m) 
+    for i in range(30): #len(animal_name_m) 
         print(i)
         id += 1
         name = animal_name_m[i]
@@ -116,11 +109,11 @@ def generate_animals(connection, cursor):
         flag = 0
         s_date = str(datetime.datetime.now())
 
-        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}\n".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
         f.write(line)
 
 
-    for i in range(200): #len(animal_name_w)
+    for i in range(30): #len(animal_name_w)
         print(i)
         id += 1
         name = animal_name_w[i]
@@ -141,40 +134,41 @@ def generate_animals(connection, cursor):
         flag = 0
         s_date = str(datetime.datetime.now())
         
-        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}\n".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
         f.write(line)
+    f.close()
 
 
-def generate_vaccination(connection, cursor):
+def generate_vaccination():
+    f = open(VACCNATIONS_FILE, 'w')
     for i in range(VACCINATIONS):
         name = vaccination[i]
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"vaccinations\" (\"vaccinationId\", \"vaccinationName\",\"createdAt\",\"updatedAt\")
-                         VALUES (DEFAULT, \'{name}\', \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
 
-        line = "{0};{1};{2};{3};{4};{5};{6}'{7};{8};{9}".format(type, name, sex, age, history_a, breed, img, flag, s_date, s_date)
+        line = "{0};{1};{2}\n".format(name, s_date, s_date)
         f.write(line)
+    f.close()
 
 
-def generate_animal_x_vaccination(connection, cursor):
+def generate_animal_x_vaccination():
+    f = open(ANIMAL_X_VAC_FILE, 'w')
     fake = Faker(['ru_RU'])
     for i in range(ANIMAL_X_VACCINETION):
-        animal_id = randint(1, 400) #ANIMALS
+        animal_id = randint(1, 120) #ANIMALS
         if (animal_id % 2 == 0):
             vac_id = randint(1, DOG_VAC)
         else:
             vac_id = randint(CAT_VAC, VACCINATIONS)
         date = str(fake.date_this_decade())
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"animal_x_vaccinations\" (\"animalVaccinationId\", \"animalAnimalId\", \"vaccinationVaccinationId\", \"vaccinationDate\",\"createdAt\",\"updatedAt\")
-                         VALUES (DEFAULT, {animal_id}, {vac_id}, \'{date}\', \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
+
+        line = "{0};{1};{2};{3};{4}\n".format(animal_id, vac_id, date, s_date, s_date)
+        f.write(line)
+    f.close()
 
 
-def generate_message(connection, cursor):
+def generate_message():
+    f = open(MESSAGES_FILE, 'w')
     fake = Faker(['ru_RU'])
     for i in range(MESSAGE):
         name = fake.name()
@@ -187,22 +181,22 @@ def generate_message(connection, cursor):
         pre = choice(['телефон', 'email'])
         flag = 0
         s_date = str(datetime.datetime.now())
-        sql_insert = f"""INSERT INTO \"messages\" (\"messageId\", \"messageName\", \"phone\", \"email\", \"messageText\", \"preferredContactMethod\", \"answerFlag\",\"createdAt\",\"updatedAt\")
-                         VALUES (DEFAULT, \'{name}\', \'{phone}\', \'{email}\', \'{text}\', \'{pre}\', \'{flag}\', \'{s_date}\', \'{s_date}\');"""
-        cursor.execute(sql_insert)
-        connection.commit()
+
+        line = "{0};{1};{2};{3};{4}\n".format(name, phone, email, text, pre, flag, s_date, s_date)
+        f.write(line)
+    f.close()
 
 
-def generate_info_shelter(connection, cursor):
-    fake = Faker(['ru_RU'])
+def generate_info_shelter():
+    f = open(INFO_SHELTER_FILE, 'w')
     address = "Любовь, улица Надежды, доп Доброты"
     phone = "+7-895-923-25-54"
     email = "iva@iva.shelter.com"
     s_date = str(datetime.datetime.now())
-    sql_insert = f"""INSERT INTO \"info_shelters\" (\"id\", \"shelter_address\", \"shelter_phone\", \"shelter_email\",\"createdAt\",\"updatedAt\")
-                        VALUES (DEFAULT, \'{address}\', \'{phone}\', \'{email}\', \'{s_date}\', \'{s_date}\');"""
-    cursor.execute(sql_insert)
-    connection.commit()
+
+    line = "{0};{1};{2};{3};{4}\n".format(address, phone, email, s_date, s_date)
+    f.write(line)
+    f.close()
 
 
 def generate_dict_privilege(connection, cursor):
@@ -248,27 +242,23 @@ def generate_donation(connection, cursor):
 
 
 def main_fun():
-    try:
-        generate_animals(connection, cursor)
-        print('1')
-        generate_vaccination(connection, cursor)
-        print('2')
-        generate_animal_x_vaccination(connection, cursor)
-        print('3')
-        generate_message(connection, cursor)
-        print('4')
-        generate_info_shelter(connection, cursor)
-        print('5')
-        generate_dict_privilege(connection, cursor)
-        print('6')
-        generate_user_shelter(connection, cursor)
-        print('7')
-        generate_donation(connection, cursor)
-        print('8')
 
-
-    except (Exception, Error) as error:
-        print("Ошибка при работе с PostgreSQL", error)
+    # generate_animals()
+    print('1')
+    # generate_vaccination()
+    print('2')
+    # generate_animal_x_vaccination()
+    print('3')
+    # generate_message()
+    print('4')
+    # generate_info_shelter()
+    # print('5')
+    generate_dict_privilege()
+    # print('6')
+    # generate_user_shelter()
+    # print('7')
+    # generate_donation()
+    # print('8')
 
 
 
