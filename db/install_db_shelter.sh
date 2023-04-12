@@ -2,8 +2,10 @@
 
 psql -h 127.0.0.1 "sslmode=disable user=postgres port=5432 password=$1" < ./create_db_shelter.sql
 
-pip3 install psycopg2
-pip3 install faker
-pip3 install animals.py
+psql -h 127.0.0.1 "sslmode=disable user=postgres port=5432 password=$1" < ./filling_db_shelter.sql 
 
-python3 generate_db_shelter.py $1
+#pip3 install psycopg2
+#pip3 install faker
+#pip3 install animals.py
+
+#python3 generate_db_shelter.py $1

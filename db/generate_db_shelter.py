@@ -9,53 +9,52 @@ import datetime
 import sys
 
 animal_name_m = []
-with open('name_m.txt', encoding="utf-8") as f:
+with open('./insert/name_m.txt', encoding="utf-8") as f:
     animal_name_m = f.read()
 animal_name_m = animal_name_m.split('\n')
 animal_name_m = animal_name_m[:-1]
 
 
 animal_name_w = []
-with open('name_w.txt', encoding="utf-8") as f:
+with open('./insert/name_w.txt', encoding="utf-8") as f:
     animal_name_w = f.read()
 animal_name_w = animal_name_w.split('\n')
 animal_name_w = animal_name_w[:-1]
 
 
 breed_dog = []
-with open('breed_dog.txt', encoding="utf-8") as f:
+with open('./insert/breed_dog.txt', encoding="utf-8") as f:
     breed_dog = f.read()
 breed_dog = breed_dog.split('\n')
 breed_dog = breed_dog[:-1]
 
 
 breed_cat = []
-with open('breed_cat.txt', encoding="utf-8") as f:
+with open('./insert/breed_cat.txt', encoding="utf-8") as f:
     breed_cat = f.read()
 breed_cat = breed_cat.split('\n')
 breed_cat = breed_cat[:-1]
 
 
 vaccination = []
-with open('vaccination.txt', encoding="utf-8") as f:
+with open('./insert/vaccination.txt', encoding="utf-8") as f:
     vaccination = f.read()
 vaccination = vaccination.split('\n')
 vaccination = vaccination[:-1]
 
 
 history = []
-with open('history_animal.txt', encoding="utf-8") as f:
+with open('./insert/history_animal.txt', encoding="utf-8") as f:
     history = f.read()
 history = history.split('\n')
 history = history[:-1]
 
 
 text_message = []
-with open('text_message.txt', encoding="utf-8") as f:
+with open('./insert/text_message.txt', encoding="utf-8") as f:
     text_message = f.read()
 text_message = text_message.split('\n')
 text_message = text_message[:-1]
-
 
 
 PRIVILEGE = ['admin', 'operator', 'content-menegere']
