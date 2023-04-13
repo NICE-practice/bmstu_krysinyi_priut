@@ -48,11 +48,13 @@ class UserController {
     const { userLogin, userCheck } = req.body;
     const user = await UserShelter.findOne({ where: { userLogin } });
     if (!user) {
-      return next(ApiError.internal("User with such userLogin does not exist"));
+      return next(
+        ApiError.badRequest("User with such userLogin does not exist")
+      );
     }
     const comparePassword = bcrypt.compareSync(userCheck, user.userCheck);
     if (!comparePassword) {
-      return next(ApiError.internal("Incorrect userCheck"));
+      return next(ApiError.badRequest("Incorrect userCheck"));
     }
     const token = generateJwt(
       user.userId,
