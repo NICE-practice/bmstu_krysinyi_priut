@@ -1,4 +1,5 @@
 const supertest = require("supertest");
+process.env.PORT = 5001;
 const { app, sequelize } = require("../../index.js");
 const api = supertest(app);
 
