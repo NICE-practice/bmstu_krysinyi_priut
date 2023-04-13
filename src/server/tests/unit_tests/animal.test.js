@@ -37,7 +37,7 @@ describe("Animal API ", () => {
 
   afterEach(async () => {});
 
-  test("GET: all", async () => {
+  test("GET animal: all", async () => {
     const animals = await api
       .get("/api/animal")
       .query({ onlyNotDeleted: "false" })
@@ -46,7 +46,7 @@ describe("Animal API ", () => {
     expect(animals.body).toHaveLength(2);
   });
 
-  test("GET: onlyNotDeleted", async () => {
+  test("GET animal: onlyNotDeleted", async () => {
     const animals = await api
       .get("/api/animal")
       .query({ onlyNotDeleted: "true" })
@@ -55,7 +55,7 @@ describe("Animal API ", () => {
     expect(animals.body).toHaveLength(1);
   });
 
-  test("GET: by ID", async () => {
+  test("GET animal: by ID", async () => {
     console.log(`/api/animal/${animal1.animalId}`);
     const animal = await api
       .get(`/api/animal/${animal1.animalId}`)
@@ -66,7 +66,7 @@ describe("Animal API ", () => {
     expect(animal.body.animalVaccinationsList).toHaveLength(2);
   });
 
-  test("POST ok", async () => {
+  test("POST animal: ok", async () => {
     let { vaccinationName } = vaccination1;
     const newAnimal = {
       animalType: "sobaka",
@@ -98,7 +98,7 @@ describe("Animal API ", () => {
     expect(animals[animals.length - 1].animalName).toBe(newAnimal.animalName);
   });
 
-  test("POST fail (unauthorized)", async () => {
+  test("POST animal: fail (unauthorized)", async () => {
     let { vaccinationName } = vaccination1;
     const newAnimal = {
       animalType: "sobaka",
@@ -121,7 +121,7 @@ describe("Animal API ", () => {
     await api.post("/api/animal").send(newAnimal).expect(401);
   });
 
-  test("DELETE ok", async () => {
+  test("DELETE animal: ok", async () => {
     let { contentManagerToken } = await initUsersWithTokens();
 
     await api
@@ -133,7 +133,7 @@ describe("Animal API ", () => {
     expect(animal.deleteFlag).toBe(true);
   });
 
-  test("DELETE fail (no such animal)", async () => {
+  test("DELETE animal: fail (no such animal)", async () => {
     let { contentManagerToken } = await initUsersWithTokens();
 
     await api
@@ -142,7 +142,7 @@ describe("Animal API ", () => {
       .expect(404);
   });
 
-  test("PUT ok", async () => {
+  test("PUT animal: ok", async () => {
     let { contentManagerToken } = await initUsersWithTokens();
 
     let updatedAnimal = animal1;
@@ -159,7 +159,7 @@ describe("Animal API ", () => {
     expect(currentAnimal.animalName).toEqual(updatedAnimal.animalName);
   });
 
-  test("PUT fail (no such vaccine)", async () => {
+  test("PUT animal: fail (no such vaccine)", async () => {
     let { contentManagerToken } = await initUsersWithTokens();
 
     let updatedAnimal = animal1;

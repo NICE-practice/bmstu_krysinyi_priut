@@ -12,7 +12,7 @@ describe("InfoShelter API ", () => {
     await InfoShelter.create(infoShelter1);
   });
 
-  test("GET: one and only", async () => {
+  test("GET infoShelter: one and only", async () => {
     let infoShelter = await api
       .get("/api/infoShelter")
       .expect(200)
