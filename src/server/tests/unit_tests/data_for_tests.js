@@ -89,6 +89,26 @@ const donation1 = {
   donationSum: 1,
 };
 
+const message1 = {
+  messageId: 1,
+  messageName: "messageName1",
+  phone: "phone1",
+  email: "email1",
+  messageText: "messageText1",
+  preferredContactMethod: "preferredContactMethod1",
+  answerFlag: false,
+};
+
+const message2 = {
+  messageId: 2,
+  messageName: "messageName2",
+  phone: "phone2",
+  email: "email2",
+  messageText: "messageText2",
+  preferredContactMethod: "preferredContactMethod2",
+  answerFlag: true,
+};
+
 module.exports = {
   priv1,
   priv2,
@@ -105,4 +125,6 @@ module.exports = {
   animalVaccination2,
   infoShelter1,
   donation1,
+  message1,
+  message2,
 };
