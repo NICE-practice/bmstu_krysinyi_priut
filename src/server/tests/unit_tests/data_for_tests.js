@@ -77,6 +77,12 @@ const animalVaccination2 = {
   vaccinationVaccinationId: vaccination2.vaccinationId,
 };
 
+const infoShelter1 = {
+  shelter_address: "shelter_address",
+  shelter_phone: "shelter_phone",
+  shelter_email: "shelter_email",
+};
+
 module.exports = {
   priv1,
   priv2,
@@ -91,4 +97,5 @@ module.exports = {
   animal2,
   animalVaccination1,
   animalVaccination2,
+  infoShelter1,
 };
