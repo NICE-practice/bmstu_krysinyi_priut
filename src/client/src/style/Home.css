@@ -1,0 +1,112 @@
+.cat_inf{
+    margin: 20px;
+    background-color: white;
+    height: 500px;
+    width: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cat_img{
+    padding-top: 10px;
+    height: 330px;
+    width: 260px;
+}
+
+.cat_title2{
+    color: #8A817C;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.cat_but{
+    width: 170px;
+    height: 60px;
+    border-radius: 50px;
+    border-width: 3px;
+    background-color: white;
+    border-color:  #FFE4C4;
+    border-style: solid;
+    color:  #8A817C;  
+    font-family: Montserrat;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+
+.cat_but:hover, .cat_but:focus, .cat_but:active {
+    background-color: #FFE4C4;
+}
+
+.arrow_cats:hover, .arrow_cats:focus, .arrow_cats:active {
+    background-color: #FFE4C4;
+}
+
+.cats_but{
+    margin-top: 45px;
+    width: 240px;
+    height: 70px;
+    border-radius: 50px;
+    background-color:   #FFE4C4;
+    border-color:  #FFE4C4;
+    border-width: 3px;
+    border-style: solid;
+    color:  #8A817C;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.cats_but:hover, .cats_but:focus, .cats_but:active {
+    opacity: 0.7;
+}
+
+
+.team_inf{
+    margin: 10px 60px;
+    height: 400px;
+    width: 400px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: white;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    overflow: hidden;
+
+}
+
+.team_img{
+    height: 300px;
+    width: 400px;
+    transition: transform ease 0.3s;
+}
+
+.team_img:hover {
+
+    transform: scale(1.1); /* Увеличиваем масштаб */
+   }
+
+.name_team{
+    margin-top: 20px;
+    color: #8A817C;  
+    font-family: Montserrat;
+    font-style: normal; 
+    font-size: 24px;
+}
+
+.role_team{
+    margin-bottom: 20px;
+    height: 15px;
+    color: #8A817C;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-size: 18px;
+}
