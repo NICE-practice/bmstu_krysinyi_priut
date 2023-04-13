@@ -83,6 +83,12 @@ const infoShelter1 = {
   shelter_email: "shelter_email",
 };
 
+const donation1 = {
+  donationId: 1,
+  donationName: "smth",
+  donationSum: 1,
+};
+
 module.exports = {
   priv1,
   priv2,
@@ -98,4 +104,5 @@ module.exports = {
   animalVaccination1,
   animalVaccination2,
   infoShelter1,
+  donation1,
 };
