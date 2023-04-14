@@ -90,7 +90,6 @@
 }
 
 .team_img:hover {
-
     transform: scale(1.1); /* Увеличиваем масштаб */
    }
 
@@ -109,4 +108,36 @@
     font-family: Montserrat;
     font-style: normal;
     font-size: 18px;
+}
+
+.footer{
+    background-color: #463F3A;
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_img{
+    margin-left: 140px;
+    width: 350px;
+    height: 350px;
+}
+
+.title_footer{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #F4F3EE;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.footer_text{
+    margin-left: 10px;
+    margin-top: 15px;
+    font-size: 20px;
+    color: #FFE4C4;
 }
