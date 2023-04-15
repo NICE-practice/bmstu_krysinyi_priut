@@ -1,28 +1,36 @@
 name: Node.js
 
-on: [push]
-
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'wiki/**'
 
 jobs:
-  build:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Chmod
+      run: |
+        npm install
+        npx eslint .
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/src/server
+
+      shell: bash
+
+
+  unit_test:
+    needs: linter
     runs-on: ubuntu-latest
 
-
-    # service containers to run with `postgres-job`
     services:
-      # label used to access the service container
       postgres:
-        # Docker Hub image
         image: postgres:latest
-        # service environment variables
-        # `POSTGRES_HOST` is `postgres`
         env:
-          # required
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
-          # maps tcp port 5432 on service container to the host
           - 5432:5432
-        # set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -31,12 +39,6 @@ jobs:
    
     steps:
     - uses: actions/checkout@v2
-    - name: pwd
-      run: |
-        pwd
-        /usr/bin/ls -a
-        cd db
-        pwd
     - name: Chmod
       run: chmod +x ./install_db_shelter.sh
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
@@ -47,12 +49,21 @@ jobs:
       run: ./install_db_shelter.sh $POSTGRES_PASSWORD
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
-    - name: Test1
-      run: sudo apt update
-    - name: Test2
-      run: sudo apt install postgresql postgresql-contrib
-    - name: Test3
+    - name: Create file env
       env:
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      run: psql "sslmode=disable user=postgres hostaddr=127.0.0.1 port=5432 password=$POSTGRES_PASSWORD dbname=shelter_db" -c "SELECT * FROM \"shelter_db\".\"public\".\"animals\";"
-    
+        POSTGRES_DB_NAME: ${{ secrets.POSTGRES_DB_NAME }}
+        POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+        POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        ENV_SECRET_KEY: ${{ secrets.ENV_SECRET_KEY }}
+      run: echo -e "PORT=5000\nDB_NAME=$POSTGRES_DB_NAME\nDB_USER=$POSTGRES_USER\nDB_PASSWORD=$POSTGRES_PASSWORD\nDB_HOST=$POSTGRES_HOST\nDB_PORT=$POSTGRES_PORT\nSECRET_KEY=$ENV_SECRET_KEY" > .env
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/src/server
+
+    - name: Run test
+      run: | 
+        npm install
+        npm test
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/src/server
+
+
