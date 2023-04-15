@@ -7,7 +7,21 @@ on:
       - 'wiki/**'
 
 jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Chmod
+      run: |
+        npm install
+        npx eslint .
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/src/server
+
+      shell: bash
+
+
   unit_test:
+    needs: linter
     runs-on: ubuntu-latest
 
     services:
@@ -52,14 +66,4 @@ jobs:
         npm test
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/src/server
 
-  linter:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Chmod
-      run: |
-        npm install
-        npx eslint .
-      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/src/server
 
-      shell: bash
