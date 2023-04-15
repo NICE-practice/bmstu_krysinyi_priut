@@ -1,10 +1,13 @@
 const supertest = require("supertest");
+
 process.env.PORT = 5002;
-const { app, sequelize } = require("../../index.js");
+
+const { app, sequelize } = require("../../index");
+
 const api = supertest(app);
 
-const { infoShelter1 } = require("./data_for_tests.js");
-const { InfoShelter } = require("../../models/modelsORM.js");
+const { infoShelter1 } = require("./data_for_tests");
+const { InfoShelter } = require("../../models/modelsORM");
 
 describe("InfoShelter API ", () => {
   beforeEach(async () => {

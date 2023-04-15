@@ -1,6 +1,7 @@
-const { DictPrivelege, UserShelter } = require("../../models/modelsORM");
 const supertest = require("supertest");
-const { app, sequelize } = require("../../index.js");
+const { DictPrivelege } = require("../../models/modelsORM");
+const { app } = require("../../index");
+
 const api = supertest(app);
 const {
   priv1,
