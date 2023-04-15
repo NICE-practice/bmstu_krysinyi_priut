@@ -33,7 +33,7 @@ jobs:
       env:
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       run: ./install_db_shelter.sh $POSTGRES_PASSWORD
-      working-directory: /home/runner/work/dr-td/dr-td/db/
+      working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
     - name: Create file env
       env:
