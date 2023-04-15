@@ -1,9 +1,12 @@
 const supertest = require("supertest");
+
 process.env.PORT = 5001;
-const { app, sequelize } = require("../../index.js");
+
+const { app, sequelize } = require("../../index");
+
 const api = supertest(app);
 
-const { initUsersWithTokens } = require("./tokens_for_tests.js");
+const { initUsersWithTokens } = require("./tokens_for_tests");
 const {
   vaccination1,
   vaccination2,
@@ -12,16 +15,13 @@ const {
   animal2,
   animalVaccination1,
   animalVaccination2,
-  userAdmin,
-  userOperator,
-  userContentManager,
-} = require("./data_for_tests.js");
+} = require("./data_for_tests");
 
 const {
   Animal,
   Vaccination,
   AnimalVaccination,
-} = require("../../models/modelsORM.js");
+} = require("../../models/modelsORM");
 
 describe("Animal API ", () => {
   beforeEach(async () => {
@@ -56,7 +56,6 @@ describe("Animal API ", () => {
   });
 
   test("GET animal: by ID", async () => {
-    console.log(`/api/animal/${animal1.animalId}`);
     const animal = await api
       .get(`/api/animal/${animal1.animalId}`)
       .expect(200)
@@ -67,7 +66,7 @@ describe("Animal API ", () => {
   });
 
   test("POST animal: ok", async () => {
-    let { vaccinationName } = vaccination1;
+    const { vaccinationName } = vaccination1;
     const newAnimal = {
       animalType: "sobaka",
       animalName: "sutulaya",
@@ -78,15 +77,15 @@ describe("Animal API ", () => {
       animalImg: "smth.png",
       deleteFlag: false,
       vaccinationsList: [
-        { vaccinationName: vaccinationName },
+        { vaccinationName },
         {
-          vaccinationName: vaccinationName,
+          vaccinationName,
           vaccinationDate: "2021-07-27T21:00:00.000Z",
         },
       ],
     };
 
-    let { contentManagerToken } = await initUsersWithTokens();
+    const { contentManagerToken } = await initUsersWithTokens();
 
     await api
       .post("/api/animal")
@@ -99,7 +98,7 @@ describe("Animal API ", () => {
   });
 
   test("POST animal: fail (unauthorized)", async () => {
-    let { vaccinationName } = vaccination1;
+    const { vaccinationName } = vaccination1;
     const newAnimal = {
       animalType: "sobaka",
       animalName: "sutulaya",
@@ -110,9 +109,9 @@ describe("Animal API ", () => {
       animalImg: "smth.png",
       deleteFlag: false,
       vaccinationsList: [
-        { vaccinationName: vaccinationName },
+        { vaccinationName },
         {
-          vaccinationName: vaccinationName,
+          vaccinationName,
           vaccinationDate: "2021-07-27T21:00:00.000Z",
         },
       ],
@@ -122,7 +121,7 @@ describe("Animal API ", () => {
   });
 
   test("DELETE animal: ok", async () => {
-    let { contentManagerToken } = await initUsersWithTokens();
+    const { contentManagerToken } = await initUsersWithTokens();
 
     await api
       .delete(`/api/animal/${animal1.animalId}`)
@@ -134,7 +133,7 @@ describe("Animal API ", () => {
   });
 
   test("DELETE animal: fail (no such animal)", async () => {
-    let { contentManagerToken } = await initUsersWithTokens();
+    const { contentManagerToken } = await initUsersWithTokens();
 
     await api
       .delete(`/api/animal/10`)
@@ -143,9 +142,9 @@ describe("Animal API ", () => {
   });
 
   test("PUT animal: ok", async () => {
-    let { contentManagerToken } = await initUsersWithTokens();
+    const { contentManagerToken } = await initUsersWithTokens();
 
-    let updatedAnimal = animal1;
+    const updatedAnimal = animal1;
     updatedAnimal.animalName = "new name";
     updatedAnimal.vaccinationsList = [];
 
@@ -160,9 +159,9 @@ describe("Animal API ", () => {
   });
 
   test("PUT animal: fail (no such vaccine)", async () => {
-    let { contentManagerToken } = await initUsersWithTokens();
+    const { contentManagerToken } = await initUsersWithTokens();
 
-    let updatedAnimal = animal1;
+    const updatedAnimal = animal1;
     updatedAnimal.animalName = "new name";
     updatedAnimal.vaccinationsList = [
       { vaccinationName: vaccination1.vaccinationName },

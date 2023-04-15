@@ -1,12 +1,15 @@
 const supertest = require("supertest");
+
 process.env.PORT = 5006;
-const { app, sequelize } = require("../../index.js");
+
+const { app, sequelize } = require("../../index");
+
 const api = supertest(app);
 
-const { initUsersWithTokens } = require("./tokens_for_tests.js");
-const { message1, message2 } = require("./data_for_tests.js");
+const { initUsersWithTokens } = require("./tokens_for_tests");
+const { message1, message2 } = require("./data_for_tests");
 
-const { Message } = require("../../models/modelsORM.js");
+const { Message } = require("../../models/modelsORM");
 
 describe("Message API ", () => {
   beforeEach(async () => {
@@ -16,7 +19,7 @@ describe("Message API ", () => {
   });
 
   test("GET list message: ok", async () => {
-    let { operatorToken } = await initUsersWithTokens();
+    const { operatorToken } = await initUsersWithTokens();
 
     const messages = await api
       .get("/api/message")
@@ -27,7 +30,7 @@ describe("Message API ", () => {
   });
 
   test("GET list message: fail (forbidden)", async () => {
-    let { contentManagerToken } = await initUsersWithTokens();
+    const { contentManagerToken } = await initUsersWithTokens();
 
     await api
       .get("/api/message")
@@ -35,7 +38,7 @@ describe("Message API ", () => {
       .expect(403);
   });
   test("GET message by ID: ok", async () => {
-    let { operatorToken } = await initUsersWithTokens();
+    const { operatorToken } = await initUsersWithTokens();
 
     const message = await api
       .get(`/api/message/${message1.messageId}`)
@@ -69,11 +72,11 @@ describe("Message API ", () => {
   });
 
   test("PATCH message (change answered flag): ok", async () => {
-    let { operatorToken } = await initUsersWithTokens();
+    const { operatorToken } = await initUsersWithTokens();
 
-    let updatedMessage = message1;
+    const updatedMessage = message1;
     updatedMessage.answerFlag = !updatedMessage.answerFlag;
-    let answerFlag = updatedMessage.answerFlag;
+    const { answerFlag } = updatedMessage;
 
     await api
       .patch(`/api/message/${message1.messageId}`)
@@ -93,7 +96,7 @@ describe("Message API ", () => {
   });
 
   test("PATCH message (change answered flag): fail (no such message)", async () => {
-    let { operatorToken } = await initUsersWithTokens();
+    const { operatorToken } = await initUsersWithTokens();
 
     await api
       .patch(`/api/message/421`)
