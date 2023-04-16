@@ -1,0 +1,102 @@
+.authimg{
+    background:url(../img/sign.jpg) no-repeat center center; 
+    height: 400px; 
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.authmaintext{
+
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 138px;
+    margin: 0;
+
+    /* text1 */
+
+    color: #F4F3EE;
+
+}
+
+.butauth{
+    align-self: flex-end;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 250px;
+    height: 70px;
+    margin-right: 460px;
+
+    /* Button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #FFE4C4;
+    border-color:  #FFE4C4;
+    border-radius: 40px;
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 92px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* text2 */
+
+    color: #8A817C;
+}
+
+.authform{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    justify-content: center;
+}
+
+.authcontent{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.inputauth{
+    background: rgba(244, 243, 238, 0.6);
+    border-radius: 70px;
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 92px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* footer */
+
+    color: #463F3A;
+
+}
+
+.labelauth{
+    font-family: 'Istok Web';
+font-style: normal;
+font-weight: 700;
+font-size: 48px;
+line-height: 138px;
+
+/* footer */
+
+color: #463F3A;
+
+}
