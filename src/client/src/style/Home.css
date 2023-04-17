@@ -141,3 +141,51 @@
     font-size: 20px;
     color: #FFE4C4;
 }
+
+.logo{
+    padding-left: 50px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    color: #FFE4C4;
+    
+}
+
+.hlink{
+    text-decoration: none;
+    color: #F4F3EE; 
+    font-size: 20px;  
+    font-family: Inter;
+    font-style: normal;
+    list-style-type: none;
+}
+
+.hitem{
+    margin-right: 55px;
+    text-decoration: none;
+    list-style-type: none;
+}
+.hlink:hover, .hlink:focus, .hlink:active {
+    text-decoration: underline;
+    text-decoration: none;
+    color: #FFE4C4;
+    
+}
+
+.head_list{
+    display: flex;
+    flex-direction: row;
+    padding-top: 15px;
+    padding-left: 200px;
+    
+}
+
+.menubase{
+    background-color: #463F3A;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;   
+}
