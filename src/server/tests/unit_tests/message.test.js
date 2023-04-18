@@ -26,7 +26,8 @@ describe("Message API ", () => {
       .set({ authorization: operatorToken })
       .expect(200)
       .expect("Content-Type", /application\/json/);
-    expect(messages.body).toHaveLength(2);
+    expect(messages.body.messages).toHaveLength(2);
+    expect(messages.body.messagesCount).toEqual(2);
   });
 
   test("GET list message: fail (forbidden)", async () => {
