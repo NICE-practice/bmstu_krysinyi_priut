@@ -1,10 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import DonateForm from "../conponents/DonateForm";
 
 export default function Home() {
   return (
     <div>
-        HOME
+      HOME
+      <DonateForm />
     </div>
-  )
+  );
 }
