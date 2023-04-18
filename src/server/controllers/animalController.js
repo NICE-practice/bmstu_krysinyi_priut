@@ -116,15 +116,21 @@ class AnimalController {
     const offset = page * limit - limit;
 
     let animalsORM;
+    let animalsCount;
     if (onlyNotDeleted === "true") {
-      animalsORM = await Animal.findAll({
+      const { count, rows } = await Animal.findAndCountAll({
         where: { deleteFlag: false },
         limit,
         offset,
       });
+      animalsORM = rows;
+      animalsCount = count;
     } else {
-      animalsORM = await Animal.findAll({ limit, offset });
+      const { count, rows } = await Animal.findAndCountAll({ limit, offset });
+      animalsORM = rows;
+      animalsCount = count;
     }
+
     const animalsDTO = [];
 
     for (const animalORM of animalsORM) {
@@ -133,7 +139,7 @@ class AnimalController {
       );
       animalsDTO.push(animalDTO);
     }
-    return res.json(animalsDTO);
+    return res.json({ animals: animalsDTO, animalsCount });
   }
 
   async getById(req, res, next) {

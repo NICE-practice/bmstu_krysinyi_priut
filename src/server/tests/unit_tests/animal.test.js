@@ -43,7 +43,8 @@ describe("Animal API ", () => {
       .query({ onlyNotDeleted: "false" })
       .expect(200)
       .expect("Content-Type", /application\/json/);
-    expect(animals.body).toHaveLength(2);
+    expect(animals.body.animals).toHaveLength(2);
+    expect(animals.body.animalsCount).toEqual(2);
   });
 
   test("GET animal: onlyNotDeleted", async () => {
@@ -52,7 +53,8 @@ describe("Animal API ", () => {
       .query({ onlyNotDeleted: "true" })
       .expect(200)
       .expect("Content-Type", /application\/json/);
-    expect(animals.body).toHaveLength(1);
+    expect(animals.body.animals).toHaveLength(1);
+    expect(animals.body.animalsCount).toEqual(1);
   });
 
   test("GET animal: by ID", async () => {

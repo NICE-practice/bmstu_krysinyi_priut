@@ -35,14 +35,15 @@ class MessageController {
     limit = limit || 9;
     const offset = page * limit - limit;
 
-    const messagesORM = await Message.findAll({ limit, offset });
-
+    const { count, rows } = await Message.findAndCountAll({ limit, offset });
+    const messagesCount = count;
+    const messagesORM = rows;
     const messagesDTO = [];
     for (const messageORM of messagesORM) {
       const messageDTO = new MessageDTO(messageORM);
       messagesDTO.push(messageDTO);
     }
-    return res.json(messagesDTO);
+    return res.json({ messages: messagesDTO, messagesCount });
   }
 
   async getById(req, res, next) {
