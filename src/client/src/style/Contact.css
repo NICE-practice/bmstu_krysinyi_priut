@@ -1,0 +1,84 @@
+.form-block{
+    margin-right: 800px;
+}
+.form_text{
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color:  #8A817C;
+    height : 40px;
+    width : 450px;
+}
+
+.name_item{
+    margin-top: 15px;
+    color: #8A817C;
+    font-size: 18px;
+}
+.inf_block{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-left: 200px;
+}
+
+.message_text{
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color:  #8A817C;
+    height : 200px;
+    width : 450px;
+}
+
+.inf_text{
+    margin-left: 10px;
+    font-size: 20px;
+    color: #8A817C;
+}
+
+.inf_line{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.form_but{
+    margin-top: 40px;
+    height: 40px;
+    width: 140px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color:  #FFE4C4;
+    background-color:  #FFE4C4;
+    color: #BCB8B1;
+}
+
+.guruweba_example_form2{
+    display: flex;
+    flex-direction: column;
+    align-items: left;   
+    margin-bottom: 30px;  
+    margin-top: 30px;    
+    margin-right: 250px;
+}
+
+.guruweba_example_form2{
+    display: flex;
+    flex-direction: column;
+    align-items: left;   
+    margin-bottom: 30px;    
+    margin-right: 250px;
+}
+
+.section_contact{
+    justify-content:space-between;
+}
+
+.menubase{
+    background-color: #463F3A;
+    height: 100px;
+}
