@@ -19,3 +19,21 @@ class DonationDTO {
 }
 
 module.exports = DonationDTO;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Donation:
+ *       type: object
+ *       properties:
+ *         donationId:
+ *           type: integer
+ *           description: Id of the donation
+ *         donationName:
+ *           type: string
+ *           description: Donation author's name
+ *         donationSum:
+ *           type: integer
+ *           description: The sum of the donation
+ */

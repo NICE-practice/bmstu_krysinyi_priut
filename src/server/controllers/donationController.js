@@ -23,3 +23,29 @@ class DonationController {
 }
 
 module.exports = new DonationController();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Donations
+ *   description: The donations managing API
+ * /donation:
+ *   post:
+ *     summary: Send a new donation
+ *     tags: [Donations]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Donation'
+ *     responses:
+ *       200:
+ *         description: The sent donation.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Donation'
+ *       500:
+ *         description: Internal server error
+ * */
