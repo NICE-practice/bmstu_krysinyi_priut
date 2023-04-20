@@ -19,3 +19,25 @@ class InfoShelterDTO {
 }
 
 module.exports = InfoShelterDTO;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     InfoShelter:
+ *       type: object
+ *       required:
+ *         - shelter_address
+ *         - shelter_phone
+ *         - shelter_email
+ *       properties:
+ *         shelter_address:
+ *           type: string
+ *           description: Shelter's address
+ *         shelter_phone:
+ *           type: string
+ *           description: Shelter's phone
+ *         shelter_email:
+ *           type: string
+ *           description: Shelter's email
+ */

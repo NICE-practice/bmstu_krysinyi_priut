@@ -16,3 +16,23 @@ class InfoShelterController {
 }
 
 module.exports = new InfoShelterController();
+
+/**
+ * @swagger
+ * tags:
+ *   name: InfoShelter
+ *   description: The infoShelter managing API
+ * /infoShelter:
+ *   get:
+ *     summary: Get information about petshelter
+ *     tags: [InfoShelter]
+ *     responses:
+ *       200:
+ *         description: Information about petshelter
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/InfoShelter'
+ *       500:
+ *         description: Internal server error
+ */
