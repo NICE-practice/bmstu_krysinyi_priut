@@ -14,7 +14,7 @@ root.render(
     value={{
       info: new ShelterInfoStore(),
       user: new UserStore(),
-	  message: new MessageStore(),
+      message: new MessageStore(),
     }}
   >
     <App />
