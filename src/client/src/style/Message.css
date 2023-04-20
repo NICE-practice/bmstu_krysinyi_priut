@@ -1,0 +1,143 @@
+.message_body{
+    width: 1661px;
+    height: 735px;
+    margin-top: 60px;
+    margin-bottom:30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    }
+
+.message_content{
+    width: 1000px;
+    height: 450px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    justify-content: flex-start;
+
+}
+
+.listmes{
+    padding-top: 100px;
+    width: 1632px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content_body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: start;
+}
+
+.messageimg{
+    margin-left:5px;
+    width: 463px;
+    height: 571px;
+}
+
+.bordermes{
+    width: 1661px;
+    height: 104px;
+    margin-bottom: 47px;
+    background: #E1C1C1;
+    border: 1px solid #E1C1C1;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.line_message{
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 46px;
+    color: #8A817C;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.message_lanel{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 46px;
+
+    /* text2 */
+
+    color: #8A817C;
+
+}
+
+.butpush{
+    margin-top: 90px;
+
+    border-radius: 20px;
+    border-style: none;
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 275px;
+    height: 56px;
+    color: #8A817C;
+    background: #FFE4C4;
+    border-radius: 20px;
+    align-self: flex-end;
+}
+
+.pagination{
+    margin-top: 30px;
+    align-self: flex-start;
+    margin-bottom: 50px;
+}
+
+.pages {
+    
+    margin: 40px 0;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    }
+
+.page, .current-page{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color:#FFE4C4;
+    background-color: #8A817C;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    padding: 5px 10px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+.current-page {
+    border: 2px solid gray;
+    font-weight: 700;
+  }
