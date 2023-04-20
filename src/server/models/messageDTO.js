@@ -29,10 +29,10 @@
  *           description: Message contets
  *         preferredContactMethod:
  *           type: string
- *           description: Weather the author wants to get a call back or to get a message on email
+ *           description: Whether the author wants to get a call back or to get a message on email
  *         answerFlag:
  *           type: boolean
- *           description: Weather the an answer to the message was already sent or not
+ *           description: Whether the an answer to the message was already sent or not
  */
 
 class MessageDTO {

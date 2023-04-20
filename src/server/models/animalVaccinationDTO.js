@@ -1,3 +1,23 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     AnimalVaccination:
+ *       type: object
+ *       required:
+ *         - vaccinationName
+ *       properties:
+ *         vaccinationId:
+ *           type: integer
+ *           description: Id of the vaccination
+ *         vaccinationName:
+ *           type: string
+ *           description: Vaccination name
+ *         vaccinationDate:
+ *           type: string
+ *           description: When the vaccination was made
+ */
+
 class AnimalVaccinationDTO {
   /** @type {number} */
   vaccinationId;
