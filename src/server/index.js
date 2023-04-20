@@ -3,8 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./docs/backend_swagger.json");
 const sequelize = require("./db");
 const router = require("./routes/index");
 const errorHandler = require("./middleware/ErrorHandlingMiddleware");
@@ -25,32 +25,10 @@ const start = async () => {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
-    const options = {
-      definition: {
-        openapi: "3.0.0",
-        info: {
-          title: "Petshelter backend API documentation",
-          version: "0.1.0",
-        },
-        components: {
-          securitySchemes: {
-            bearerAuth: {
-              type: "http",
-              scheme: "bearer",
-              bearerFormat: "JWT",
-            },
-          },
-        },
-        servers: [{ url: "http://localhost:5000/api" }],
-      },
-      apis: ["./models/*.js", "./controllers/*.js"],
-    };
-
-    const specs = swaggerJsdoc(options);
     app.use(
       "/api-docs",
       swaggerUi.serve,
-      swaggerUi.setup(specs, { explorer: true })
+      swaggerUi.setup(swaggerDocument, { explorer: true })
     );
 
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
