@@ -6,187 +6,6 @@ const {
 const ApiError = require("../errors/ApiError");
 const AnimalDTO = require("../models/animalDTO");
 
-/**
- * @swagger
- * tags:
- *   name: Animals
- *   description: The animals managing API
- * /animal:
- *   post:
- *     security:
- *        - bearerAuth: []
- *     summary: Add a new animal
- *     tags: [Animals]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Animal'
- *     responses:
- *       200:
- *         description: The added animsl.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Animal'
- *       404:
- *         description: Some of the listed vaccinations don't exist
- *       500:
- *         description: Internal server error
- *       401:
- *         description: Header didn't contain authorization token
- *       403:
- *         description: Role of the user doesn't give access for this call
- * */
-
-/**
- * @swagger
- * /animal:
- *   get:
- *     summary: Get animal list
- *     tags: [Animals]
- *     parameters:
- *       - in: query
- *         name: offset
- *         required: false
- *         schema:
- *           type: integer
- *         allowReserved: true
- *         description: The number of items to skip before starting to collect the result set
- *       - in: query
- *         name: limit
- *         required: false
- *         schema:
- *           type: integer
- *         allowReserved: true
- *         description: The numbers of items to return
- *       - in: query
- *         name: onlyNotDeleted
- *         required: false
- *         schema:
- *           type: boolean
- *         allowReserved: true
- *         description: if 1 then only animals that are currently in a petshelter are shown, if 0 -- all
- *     responses:
- *       200:
- *         description: The list of animals
- *         content:
- *           application/json:
- *             schema:
- *              type: object
- *              properties:
- *                animalsCount:
- *                  type: integer
- *                  description: The total amount of animals in DB (the maximum number that can be returned)
- *                animal:
- *                  type: array
- *                  items:
- *                    $ref: '#/components/schemas/Animal'
- *                  description: Animals list
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /animal/{animalId}:
- *   get:
- *     summary: Get an animal by id
- *     tags: [Animals]
- *     parameters:
- *       - in: path
- *         name: animalId
- *         required: true
- *         schema:
- *           type: integer
- *         allowReserved: true
- *         description: The id of animal to find
- *     responses:
- *       200:
- *         description: Animal with the specified Id
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Animal'
- *       404:
- *         description: Animal with specified id doesn't exist
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /animal/{animalId}:
- *   delete:
- *     security:
- *        - bearerAuth: []
- *     summary: Mark that the animal is not in the petshelter animore (change deleteFlag)
- *     tags: [Animals]
- *     parameters:
- *       - in: path
- *         name: animalId
- *         required: true
- *         schema:
- *           type: integer
- *         allowReserved: true
- *         description: The id of animal to find
- *     responses:
- *       200:
- *         description: Animal with the specified Id and deleteFlag=true
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Animal'
- *       404:
- *         description: Animal with specified id doesn't exist
- *       500:
- *         description: Internal server error
- *       401:
- *         description: Header didn't contain authorization token
- *       403:
- *         description: Role of the user doesn't give access for this call
- */
-
-/**
- * @swagger
- * /animal/{animalId}:
- *   put:
- *     security:
- *        - bearerAuth: []
- *     summary: Update animal by it's id
- *     tags: [Animals]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *             schema:
- *                $ref: '#/components/schemas/Animal'
- *     parameters:
- *       - in: path
- *         name: animalId
- *         required: true
- *         schema:
- *           type: integer
- *         allowReserved: true
- *         description: The id of animal to update
- *     responses:
- *       200:
- *         description: Updated animal
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Animal'
- *       401:
- *         description: Header didn't contain authorization token
- *       403:
- *         description: Role of the user doesn't give access for this call
- *       404:
- *         description: Animal with specified id doesn't exist
- *       500:
- *         description: Internal server error
- */
-
 class AnimalController {
   static async build_animalDTO_by_animalORM(animalORM) {
     const { animalId } = animalORM;
@@ -446,3 +265,184 @@ class AnimalController {
 }
 
 module.exports = new AnimalController();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Animals
+ *   description: The animals managing API
+ * /animal:
+ *   post:
+ *     security:
+ *        - bearerAuth: []
+ *     summary: Add a new animal
+ *     tags: [Animals]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Animal'
+ *     responses:
+ *       200:
+ *         description: The added animsl.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Animal'
+ *       404:
+ *         description: Some of the listed vaccinations don't exist
+ *       500:
+ *         description: Internal server error
+ *       401:
+ *         description: Header didn't contain authorization token
+ *       403:
+ *         description: Role of the user doesn't give access for this call
+ * */
+
+/**
+ * @swagger
+ * /animal:
+ *   get:
+ *     summary: Get animal list
+ *     tags: [Animals]
+ *     parameters:
+ *       - in: query
+ *         name: offset
+ *         required: false
+ *         schema:
+ *           type: integer
+ *         allowReserved: true
+ *         description: The number of items to skip before starting to collect the result set
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *         allowReserved: true
+ *         description: The numbers of items to return
+ *       - in: query
+ *         name: onlyNotDeleted
+ *         required: false
+ *         schema:
+ *           type: boolean
+ *         allowReserved: true
+ *         description: if 1 then only animals that are currently in a petshelter are shown, if 0 -- all
+ *     responses:
+ *       200:
+ *         description: The list of animals
+ *         content:
+ *           application/json:
+ *             schema:
+ *              type: object
+ *              properties:
+ *                animalsCount:
+ *                  type: integer
+ *                  description: The total amount of animals in DB (the maximum number that can be returned)
+ *                animal:
+ *                  type: array
+ *                  items:
+ *                    $ref: '#/components/schemas/Animal'
+ *                  description: Animals list
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /animal/{animalId}:
+ *   get:
+ *     summary: Get an animal by id
+ *     tags: [Animals]
+ *     parameters:
+ *       - in: path
+ *         name: animalId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         allowReserved: true
+ *         description: The id of animal to find
+ *     responses:
+ *       200:
+ *         description: Animal with the specified Id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Animal'
+ *       404:
+ *         description: Animal with specified id doesn't exist
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /animal/{animalId}:
+ *   delete:
+ *     security:
+ *        - bearerAuth: []
+ *     summary: Mark that the animal is not in the petshelter animore (change deleteFlag)
+ *     tags: [Animals]
+ *     parameters:
+ *       - in: path
+ *         name: animalId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         allowReserved: true
+ *         description: The id of animal to find
+ *     responses:
+ *       200:
+ *         description: Animal with the specified Id and deleteFlag=true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Animal'
+ *       404:
+ *         description: Animal with specified id doesn't exist
+ *       500:
+ *         description: Internal server error
+ *       401:
+ *         description: Header didn't contain authorization token
+ *       403:
+ *         description: Role of the user doesn't give access for this call
+ */
+
+/**
+ * @swagger
+ * /animal/{animalId}:
+ *   put:
+ *     security:
+ *        - bearerAuth: []
+ *     summary: Update animal by it's id
+ *     tags: [Animals]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Animal'
+ *     parameters:
+ *       - in: path
+ *         name: animalId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         allowReserved: true
+ *         description: The id of animal to update
+ *     responses:
+ *       200:
+ *         description: Updated animal
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Animal'
+ *       401:
+ *         description: Header didn't contain authorization token
+ *       403:
+ *         description: Role of the user doesn't give access for this call
+ *       404:
+ *         description: Animal with specified id doesn't exist
+ *       500:
+ *         description: Internal server error
+ */

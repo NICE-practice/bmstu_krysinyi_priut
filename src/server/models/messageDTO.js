@@ -1,40 +1,3 @@
-/**
- * @swagger
- * components:
- *   schemas:
- *     Message:
- *       type: object
- *       required:
- *         - messageName
- *         - phone
- *         - email
- *         - messageText
- *         - preferredContactMethod
- *         - answerFlag
- *       properties:
- *         messageId:
- *           type: integer
- *           description: Id of the message
- *         messageName:
- *           type: string
- *           description: Message author's name
- *         phone:
- *           type: string
- *           description: Message author's phone
- *         email:
- *           type: string
- *           description: Message author's email
- *         messageText:
- *           type: string
- *           description: Message contets
- *         preferredContactMethod:
- *           type: string
- *           description: Whether the author wants to get a call back or to get a message on email
- *         answerFlag:
- *           type: boolean
- *           description: Whether the an answer to the message was already sent or not
- */
-
 class MessageDTO {
   /** @type {number} */
   messageId;
@@ -72,3 +35,40 @@ class MessageDTO {
 }
 
 module.exports = MessageDTO;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Message:
+ *       type: object
+ *       required:
+ *         - messageName
+ *         - phone
+ *         - email
+ *         - messageText
+ *         - preferredContactMethod
+ *         - answerFlag
+ *       properties:
+ *         messageId:
+ *           type: integer
+ *           description: Id of the message
+ *         messageName:
+ *           type: string
+ *           description: Message author's name
+ *         phone:
+ *           type: string
+ *           description: Message author's phone
+ *         email:
+ *           type: string
+ *           description: Message author's email
+ *         messageText:
+ *           type: string
+ *           description: Message contets
+ *         preferredContactMethod:
+ *           type: string
+ *           description: Whether the author wants to get a call back or to get a message on email
+ *         answerFlag:
+ *           type: boolean
+ *           description: Whether the an answer to the message was already sent or not
+ */
