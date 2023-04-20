@@ -3,7 +3,7 @@ const ApiError = require("../errors/ApiError");
 const MessageDTO = require("../models/messageDTO");
 
 class MessageController {
-  async add(req, res) {
+  async add(req, res, next) {
     const {
       messageName,
       phone,
@@ -11,21 +11,25 @@ class MessageController {
       messageText,
       preferredContactMethod,
       answerFlag,
-    } = req.body;
-    const { messageId } = req.body;
-
-    const messageORM = await Message.create({
       messageId,
-      messageName,
-      phone,
-      email,
-      messageText,
-      preferredContactMethod,
-      answerFlag,
-    });
+    } = req.body;
 
-    const messageDTO = new MessageDTO(messageORM);
-    return res.json(messageDTO);
+    try {
+      const messageORM = await Message.create({
+        messageId,
+        messageName,
+        phone,
+        email,
+        messageText,
+        preferredContactMethod,
+        answerFlag,
+      });
+
+      const messageDTO = new MessageDTO(messageORM);
+      return res.json(messageDTO);
+    } catch (err) {
+      return next(ApiError.internal(err.message));
+    }
   }
 
   async getList(req, res) {

@@ -21,6 +21,7 @@
     "class-methods-use-this": "off",
     "no-plusplus": "off",
     "consistent-return": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }

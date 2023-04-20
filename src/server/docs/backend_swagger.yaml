@@ -1,0 +1,514 @@
+openapi: 3.0.3
+info:
+  title: Petshelter backend API documentation
+  version: 0.1.0
+servers:
+  - url: http://localhost:5000/api
+tags:
+  - name: Animals
+    description: The animals managing API
+  - name: Donations
+    description: The donations managing API
+  - name: InfoShelter
+    description: The infoShelter managing API
+  - name: Messages
+    description: The messages managing API
+  - name: Users
+    description: All operations of authentication and authorization
+paths:
+  /animal:
+    post:
+      security:
+        - bearerAuth: []
+      summary: Add a new animal
+      tags: [Animals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Animal'
+      responses:
+        200:
+          description: The added animsl.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animal'
+        404:
+          description: Some of the listed vaccinations don't exist
+        500:
+          description: Internal server error
+        401:
+          description: Header didn't contain authorization token
+        403:
+          description: Role of the user doesn't give access for this call
+    get:
+      summary: Get animal list
+      tags: [Animals]
+      parameters:
+        - in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+          allowReserved: true
+          description: The number of items to skip before starting to collect the result set
+        
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          allowReserved: true
+          description: The numbers of items to return
+        - in: query
+          name: onlyNotDeleted
+          required: false
+          schema:
+            type: boolean
+          allowReserved: true
+          description: if 1 then only animals that are currently in a petshelter are shown, if 0 -- all
+      responses:
+        200:
+          description: The list of animals
+          content:
+           application/json:
+              schema:
+               type: object
+               properties:
+                 animalsCount:
+                   type: integer
+                   description: The total amount of animals in DB (the maximum number that can be returned)
+                 animal:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Animal'
+                  description: Animals list
+        500:
+          description: Internal server error
+  /animal/{animalId}:
+    get:
+      summary: Get an animal by id
+      tags: [Animals]
+      parameters:
+        - in: path
+          name: animalId
+          required: true
+          schema:
+            type: integer
+          allowReserved: true
+          description: The id of animal to find
+      responses:
+        200:
+          description: Animal with the specified Id
+          content:
+            application/json:
+             schema:
+                $ref: '#/components/schemas/Animal'
+        404:
+          description: Animal with specified id doesn't exist
+        500:
+          description: Internal server error
+
+    delete:
+      security:
+        - bearerAuth: []
+      summary: Mark that the animal is not in the petshelter animore (change deleteFlag)
+      tags: [Animals]
+      parameters:
+        - in: path
+          name: animalId
+          required: true
+          schema:
+            type: integer
+          allowReserved: true
+          description: The id of animal to find
+      responses:
+        200:
+          description: Animal with the specified Id and deleteFlag=true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animal'
+        404:
+          description: Animal with specified id doesn't exist
+        500:
+          description: Internal server error
+        401:
+         description: Header didn't contain authorization token
+        403:
+          description: Role of the user doesn't give access for this call
+          
+    put:
+      security:
+         - bearerAuth: []
+      summary: Update animal by it's id
+      tags: [Animals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                 $ref: '#/components/schemas/Animal'
+      parameters:
+        - in: path
+          name: animalId
+          required: true
+          schema:
+            type: integer
+          allowReserved: true
+          description: The id of animal to update
+      responses:
+        200:
+          description: Updated animal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animal'
+        401:
+          description: Header didn't contain authorization token
+        403:
+          description: Role of the user doesn't give access for this call
+        404:
+          description: Animal with specified id doesn't exist
+        500:
+          description: Internal server error
+  /donation:
+    post:
+      summary: Send a new donation
+      tags: [Donations]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Donation'
+      responses:
+        200:
+          description: The sent donation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Donation'
+        500:
+         description: Internal server error 
+  /infoShelter:
+    get:
+      summary: Get information about petshelter
+      tags: [InfoShelter]
+      responses:
+        200:
+          description: Information about petshelter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoShelter'
+        500:
+          description: Internal server error
+  /message:
+    post:
+      summary: Send a new message
+      tags: [Messages]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        200:
+          description: The sent message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        500:
+          description: Internal server error
+    get:
+      security:
+         - bearerAuth: []
+      summary: Get messages list
+      tags: [Messages]
+      parameters:
+        - in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+          allowReserved: true
+          description: The number of items to skip before starting to collect the result set
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          allowReserved: true
+          description: The numbers of items to return
+      responses:
+        200:
+          description: The list of messages
+          content:
+            application/json:
+              schema:
+               type: object
+               properties:
+                 messagesCount:
+                   type: integer
+                   description: The total amount of messages in DB
+                 messages:
+                   type: array
+                   items:
+                     $ref: '#/components/schemas/Message'
+                   description: Messages list
+        401:
+          description: Header didn't contain authorization token
+        403:
+          description: Role of the user doesn't give access for this call
+        500:
+          description: Internal server error
+  /message/{messageId}:
+    get:
+      security:
+         - bearerAuth: []
+      summary: Get a message by id
+      tags: [Messages]
+      parameters:
+        - in: path
+          name: messageId
+          required: true
+          schema:
+            type: integer
+          allowReserved: true
+          description: The id of message to find
+      responses:
+        200:
+          description: Message with the specified Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        401:
+          description: Header didn't contain authorization token
+        403:
+          description: Role of the user doesn't give access for this call
+        404:
+          description: Message with specified id doesn't exist
+        500:
+          description: Internal server error
+
+    patch:
+      security:
+         - bearerAuth: []
+      summary: Change answered flag of a message by it's id (mark the message answered or not answered)
+      tags: [Messages]
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                 type: object
+                 properties:
+                   answerFlag:
+                     type: boolean
+                     description: The value of answerFlag to set
+      parameters:
+        - in: path
+          name: messageId
+          required: true
+          schema:
+            type: integer
+          allowReserved: true
+          description: The id of message to update
+      responses:
+        200:
+          description: Updated message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        401:
+          description: Header didn't contain authorization token
+        403:
+          description: Role of the user doesn't give access for this call
+        404:
+          description: Message with specified id doesn't exist
+        500:
+          description: Internal server error
+  /user/login:
+    post:
+      summary: Log in
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: The added animsl.
+          content:
+            application/json:
+              schema:
+               type: object
+               properties:
+                 token:
+                   type: string
+                   description: Generated authorization token
+        404:
+          description: Incorrect login or password
+        500:
+          description: Internal server error
+
+  
+          
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      required:
+        - userLogin
+        - userCheck
+      properties:
+        userLogin:
+          type: string
+          description: User's login (email)
+        userCheck:
+          type: string
+          description: User's password
+          
+    Donation:
+      type: object
+      properties:
+        donationId:
+          type: integer
+          description: Id of the donation
+        donationName:
+          type: string
+          description: Donation author's name
+        donationSum:
+          type: integer
+          description: The sum of the donation
+    AnimalVaccination:
+      type: object
+      required:
+        - vaccinationName
+      properties:
+        vaccinationId:
+          type: integer
+          description: Id of the vaccination
+        vaccinationName:
+          type: string
+          description: Vaccination name
+        vaccinationDate:
+          type: string
+          description: When the vaccination was made
+    Animal:
+      type: object
+      required:
+        - animalType
+        - animalName
+        - animalSex
+        - animalAge
+        - animalHistory
+        - animalBreed
+        - animalImg
+        - deleteFlag
+        - vaccinationsList
+      properties:
+        animalId:
+          type: integer
+          description: Id of the animal
+        animalType:
+          type: string
+          description: Type of the animal (e.g. cat, dog)
+        animalName:
+          type: string
+          description: Name of the animal
+        animalSex:
+          type: string
+          description: Sex of the animal
+        animalAge:
+          type: integer
+          description: Age of the animal
+        animalHistory:
+          type: string
+          description: How the animal got to the petshelter
+        animalBreed:
+          type: boolean
+          description: Breed of the animal
+        animalImg:
+          type: boolean
+          description: A link to the picture of the animal
+        deleteFlag:
+          type: boolean
+          description: 1 means that the animal is not in a petshelter any more
+        vaccinationsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnimalVaccination'
+          description: List of vaccinations the animal has
+    InfoShelter:
+      type: object
+      required:
+        - shelter_address
+        - shelter_phone
+        - shelter_email
+      properties:
+        shelter_address:
+          type: string
+          description: Shelter's address
+        shelter_phone:
+          type: string
+          description: Shelter's phone
+        shelter_email:
+          type: string
+          description: Shelter's email
+    Message:
+      type: object
+      required:
+        - messageName
+        - phone
+        - email
+        - messageText
+        - preferredContactMethod
+        - answerFlag
+      properties:
+        messageId:
+          type: integer
+          description: Id of the message
+        messageName:
+          type: string
+          description: Message author's name
+        phone:
+          type: string
+          description: Message author's phone
+        email:
+          type: string
+          description: Message author's email
+        messageText:
+          type: string
+          description: Message contets
+        preferredContactMethod:
+          type: string
+          description: Whether the author wants to get a call back or to get a message on email
+        answerFlag:
+          type: boolean
+          description: Whether the an answer to the message was already sent or not
+
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+ 
+
