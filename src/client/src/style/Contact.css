@@ -82,3 +82,115 @@
     background-color: #463F3A;
     height: 100px;
 }
+
+.headercontact{
+   
+    background:url(../img/dogmain.jpg) no-repeat center center; 
+    height: 850px; 
+    background-size: cover;
+}
+
+.pmain{
+    font-size: 24px;
+    color: #F4F3EE; 
+    width: 370px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.h2_main{
+    color: #F4F3EE;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+}
+
+.main_text{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding-left: 270px;
+    padding-top: 150px;
+}
+
+.header_wrapper{
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;   
+}
+
+.team{
+    background-color:  #F4F3EE;;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center;
+}
+
+.title_team{
+    margin-bottom: 50px;
+    font-size: 44px;
+    color: #8A817C;
+}
+
+.block_team{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+    justify-content: center;
+}
+
+.team_inf{
+    margin: 10px 60px;
+    height: 500px;
+    width: 400px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: white;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    overflow: hidden;
+
+}
+
+.team_img{
+    height: 300px;
+    width: 400px;
+    transition: transform ease 0.3s;
+}
+
+.team_img:hover {
+
+    transform: scale(1.1); /* Увеличиваем масштаб */
+   }
+
+.name_team{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #8A817C;  
+    font-family: Montserrat;
+    font-style: normal; 
+    font-size: 24px;
+}
+
+.role_team{
+    margin-bottom: 120px;
+    height: 15px;
+    color: #8A817C;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-size: 18px;
+}
