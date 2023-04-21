@@ -107,9 +107,13 @@ class AnimalController {
     }
   }
 
-  async getList(req, res) {
-    let { limit, page } = req.query;
+  async getList(req, res, next) {
+    const { animalBreed, animalType, animalName } = req.query;
+    let { animalAge, limit, page } = req.query;
     const { onlyNotDeleted } = req.query;
+    if (animalAge === 0) {
+      animalAge = null;
+    }
 
     page = page || 1;
     limit = limit || 9;
@@ -118,28 +122,107 @@ class AnimalController {
     let animalsORM;
     let animalsCount;
     if (onlyNotDeleted === "true") {
-      const { count, rows } = await Animal.findAndCountAll({
-        where: { deleteFlag: false },
-        limit,
-        offset,
-      });
-      animalsORM = rows;
-      animalsCount = count;
+      if (!animalBreed && !animalType && !animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (!animalBreed && !animalType && animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalAge },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (!animalBreed && animalType && !animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalType },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (animalBreed && !animalType && !animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalBreed },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (!animalBreed && animalType && animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalType, animalAge },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (animalBreed && animalType && !animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalBreed, animalType },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (animalBreed && !animalType && animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalBreed, animalAge },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (animalBreed && animalType && animalAge) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalBreed, animalType, animalAge },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
+      if (animalName) {
+        const { count, rows } = await Animal.findAndCountAll({
+          where: { deleteFlag: false, animalName },
+          limit,
+          offset,
+        });
+        animalsORM = rows;
+        animalsCount = count;
+      }
     } else {
       const { count, rows } = await Animal.findAndCountAll({ limit, offset });
       animalsORM = rows;
       animalsCount = count;
     }
-
-    const animalsDTO = [];
-
-    for (const animalORM of animalsORM) {
-      const animalDTO = await AnimalController.build_animalDTO_by_animalORM(
-        animalORM
-      );
-      animalsDTO.push(animalDTO);
+    if (!animalsORM) {
+      return next(ApiError.badRequest(`Animals with parameters do not exist`));
     }
-    return res.json({ animals: animalsDTO, animalsCount });
+    try {
+      const animalsDTO = [];
+      for (const animalORM of animalsORM) {
+        const animalDTO = await AnimalController.build_animalDTO_by_animalORM(
+          animalORM
+        );
+        animalsDTO.push(animalDTO);
+      }
+      return res.json({ animals: animalsDTO, animalsCount });
+    } catch (err) {
+      return next(ApiError.internal(err.message));
+    }
   }
 
   async getById(req, res, next) {
