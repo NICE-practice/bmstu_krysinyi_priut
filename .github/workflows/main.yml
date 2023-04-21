@@ -10,8 +10,8 @@ jobs:
   linter:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Chmod
+    - uses: actions/checkout@v3
+    - name: Run linter
       run: |
         npm install
         npx eslint .
@@ -38,18 +38,18 @@ jobs:
           --health-retries 5
    
     steps:
-    - uses: actions/checkout@v2
-    - name: Chmod
+    - uses: actions/checkout@v3
+    - name: Chmod file for install DB
       run: chmod +x ./install_db_shelter.sh
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
-    - name: Install DB
+    - name: Install DB 
       env:
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       run: ./install_db_shelter.sh $POSTGRES_PASSWORD
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
       shell: bash
-    - name: Create file env
+    - name: Create file env for unittest
       env:
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         POSTGRES_DB_NAME: ${{ secrets.POSTGRES_DB_NAME }}
@@ -60,7 +60,7 @@ jobs:
       run: echo -e "PORT=5000\nDB_NAME=$POSTGRES_DB_NAME\nDB_USER=$POSTGRES_USER\nDB_PASSWORD=$POSTGRES_PASSWORD\nDB_HOST=$POSTGRES_HOST\nDB_PORT=$POSTGRES_PORT\nSECRET_KEY=$ENV_SECRET_KEY" > .env
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/src/server
 
-    - name: Run test
+    - name: Run unittest
       run: | 
         npm install
         npm test
