@@ -10,7 +10,7 @@ jobs:
   linter:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Run linter
       run: |
         npm install
@@ -38,7 +38,7 @@ jobs:
           --health-retries 5
    
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Chmod file for install DB
       run: chmod +x ./install_db_shelter.sh
       working-directory: /home/runner/work/bmstu_teamdev_shelter/bmstu_teamdev_shelter/db/
