@@ -51,7 +51,7 @@ const Header = observer(() => {
       },
     ];
   }
-  if (user.isAuth === true && user.privilege === 1) {
+  if (user.isAuth === true && user.privilege === 3) {
     itemsArr = [
       {
         value: "Карточки животных",

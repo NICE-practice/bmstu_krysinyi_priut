@@ -7,8 +7,10 @@ import { Context } from ".";
 import { fetchInfo } from "./http/shelterInfoApi";
 import { check } from "./http/userApi";
 import { Spinner } from "react-bootstrap";
+import { fetchPets } from "./http/petsApi";
 
 const App = observer(() => {
+  const { pet } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const { info } = useContext(Context);
   const { user } = useContext(Context);
@@ -22,6 +24,22 @@ const App = observer(() => {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (pet.age !== 0) {
+      fetchPets(pet.breed, pet.type, pet.age, pet.page, 15).then((data) => {
+        console.log(data);
+        pet.setPet(data.animals);
+        pet.setTotalCount(data.animalsCount);
+      });
+    } else {
+      fetchPets(pet.breed, pet.type, null, pet.page, 15).then((data) => {
+        console.log(data);
+        pet.setPet(data.animals);
+        pet.setTotalCount(data.animalsCount);
+      });
+    }
+  }, [pet.breed, pet.type, pet.age, pet.page]);
 
   if (loading) {
     return <Spinner animation={"grow"} />;
