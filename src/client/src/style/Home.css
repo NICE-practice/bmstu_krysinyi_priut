@@ -193,6 +193,7 @@
 .adddonate{
     height: 440px;
     width: 800px;
+    margin-right: 300px;
     background-color: #463F3A;
     border-radius: 40px;
 }
@@ -589,3 +590,132 @@ div#care {
     border-width: 3px;
     border-color: #8A817C;
 }
+
+.header{
+    background:url(../img/cat2.jpg) no-repeat center center; 
+    height: 850px; 
+    background-size: cover;
+}
+
+.h2_main{
+    color: #F4F3EE;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+}
+
+
+.main_text{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding-left: 270px;
+    padding-top: 150px;
+}
+.hbut{
+    margin-top: 25px;
+    color : #463F3A;
+    background-color:  #FFE4C4;
+    border: none;
+    border-radius: 20px;
+    height: 45px;
+    width: 170px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.hbut:hover, .hlink:focus, .hlink:active {
+    opacity: 0.7;
+}
+
+.donation_subtitle{
+    margin-top: 30px;
+    color: #8A817C;  
+    font-size: 20px;
+    font-family: Inter;
+    font-style: normal;
+}
+
+.img_donation{
+    width: 130px;
+    height: 130px;
+    color:  #FFE4C4;
+}
+
+.donation_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 80px;
+    height: 150px;
+}
+
+.AboutUs{
+    background-color: white;
+    height: 750px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.title_about{
+    color: #8A817C;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    margin-left: 250px;
+}
+
+.subtitle_about{
+    color: #8A817C;  
+    font-size: 20px;
+    width: 430px;
+    font-family: Inter;
+    font-style: normal;
+    margin-left: 250px;
+}
+
+.img_about{
+    margin-top: 30px;
+    height: 700px;
+    width: 1200px;
+    margin-left: 200px;
+}
+
+.text_about{
+    margin-top: 40px;
+}
+
+.donation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 750px;
+}
+
+.contentdonate{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title_donation{
+    margin-top: 320px;
+    color: #8A817C;  
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    margin: auto;
+}
+
+
