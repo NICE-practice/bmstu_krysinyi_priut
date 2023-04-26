@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { createDonation } from "../http/donateApi";
 import dog from "../img/dog2.png";
 import "../style/Home.css";
-import DonateModal from "./DonateModal";
 
-export default function DonateForm() {
+export default function DonateForm(props) {
   const [fio, setFio] = useState("");
   const [sum, setSum] = useState("");
-  const [modalDonate, setModalDonate] = useState(false);
   const addDonate = async () => {
     try {
       let item = await createDonation(fio, sum);
-      setModalDonate(true);
+      props.func(true);
       console.log(item);
     } catch (e) {
       alert(e.response.data.message);
@@ -19,11 +17,6 @@ export default function DonateForm() {
   };
   return (
     <div className="adddonate">
-      <DonateModal
-        isOpened={modalDonate}
-        onModalClose={() => setModalDonate(false)}
-      />
-      ;
       <div className="addcontentdonate">
         <div>
           <form>
