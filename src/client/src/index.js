@@ -6,6 +6,7 @@ import ShelterInfoStore from "./store/ShelterInfoStore";
 import UserStore from "./store/UserStore";
 import MessageStore from "./store/MessageStore";
 import PetStore from "./store/PetStore";
+import VaccinationStore from "./store/VaccinationStore";
 
 export const Context = createContext(null);
 
@@ -17,6 +18,7 @@ root.render(
       user: new UserStore(),
       message: new MessageStore(),
       pet: new PetStore(),
+      vaccination: new VaccinationStore(),
     }}
   >
     <App />
