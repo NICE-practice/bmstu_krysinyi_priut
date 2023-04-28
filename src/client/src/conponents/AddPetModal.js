@@ -125,7 +125,7 @@ const AddPetModal = observer((props) => {
               />
               <div className="name_item">История </div>
               <textarea
-                className="message_text"
+                className="message_text_up"
                 name="message"
                 value={history}
                 onChange={(e) => setHistory(e.target.value)}

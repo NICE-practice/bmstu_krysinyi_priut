@@ -8,6 +8,7 @@ export default class PetStore {
     this._selectedType = "";
     this._selectedBreed = "";
     this._selectedAge = 0;
+    this._selectedName = "";
     this._totalCount = 0;
     this._limit = 15;
     makeAutoObservable(this);
@@ -42,6 +43,10 @@ export default class PetStore {
     this.setPage(1);
     this._selectedAge = age;
   }
+  setSelectedName(name) {
+    this.setPage(1);
+    this._selectedName = name;
+  }
 
   get pets() {
     return this._pets;
@@ -66,5 +71,8 @@ export default class PetStore {
   }
   get age() {
     return this._selectedAge;
+  }
+  get name() {
+    return this._selectedName;
   }
 }

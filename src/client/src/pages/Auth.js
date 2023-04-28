@@ -20,7 +20,7 @@ const Auth = observer(() => {
       console.log(user.privilege);
       if (user.privilege === 2)
         window.location.assign("http://localhost:3000/operator");
-      else if (user.privilege === 1)
+      else if (user.privilege === 3)
         window.location.assign("http://localhost:3000/contentmanager");
     } catch (e) {
       alert(e.response.data.message);

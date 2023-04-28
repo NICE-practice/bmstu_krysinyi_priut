@@ -189,7 +189,7 @@ const PetFormUpdate = observer((props) => {
                           <div className="name_item"> Дата</div>
 
                           <DatePicker
-                            placeholderText={vac.vaccinationDate
+                            placeholderText={String(vac.vaccinationDate)
                               .substring(0, 10)
                               .replaceAll("-", ".")}
                             className="form_text_data"
