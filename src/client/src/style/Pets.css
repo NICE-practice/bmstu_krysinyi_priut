@@ -424,3 +424,164 @@ margin-left: 1300px;
   border-radius: 10px;
   margin-right: 70px;
   }
+
+
+.modal_content_vac{
+    margin: auto;
+    margin-top: 10%;
+    padding: 20px;
+    width: 870px;
+    height: 403px;
+    
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    }
+    
+.modal_close_vac{
+  margin-left: 772px;
+  margin-bottom: 15px;
+}
+
+.vaccinatiion_form{
+  width: 783px;
+  height: 156px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #F4F3EE;
+  border-radius: 10px;
+}
+
+.input_block{
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  justify-content: start;
+}
+
+.form_but_vac{
+  width: 275px;
+  height: 56px;
+  background: #FFE4C4;
+  border-radius: 20px;
+  
+  font-family: 'Istok Web';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-color: #FFE4C4;
+  color: #8A817C;
+  margin-left:505px;
+  margin-top: 45px;
+  }
+  
+.form_text_vac{
+  width: 330px;
+  height: 53px;
+  
+  background: #FFFFFF;
+  border: 1px solid #8A817C;
+  border-radius: 10px;
+  margin-right: 70px;
+  }
+
+.form_text_data{
+    width: 149px;
+    height: 53px;
+    background: #FFFFFF;
+    border: 1px solid #8A817C;
+    border-radius: 10px;
+}
+
+.imgcatupdate{
+  height: 600px;
+  width: 470px;
+  margin-bottom: 70px;
+}
+
+.updatecard_modal{
+  width: 1151px;
+  height: 750px;
+  background: #FFFFFF;
+  margin: auto;
+  margin-top: 10%;
+  border: 1px solid #8A817C;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.updatecard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal_close_update{
+  margin-top: 20px;
+  align-self: flex-end;
+  margin-right: 40px;
+}
+
+.form_update{
+  display: flex;
+  flex-direction: column;
+  align-items: left;   
+  margin-bottom: 30px;      
+}
+
+.block_vac{
+  width: 520px;
+  height: 120px;
+  overflow: auto;
+}
+
+.vac_line{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form_but_update{
+  width: 275px;
+  height: 56px;
+  align-self: flex-end;
+  background: #FFE4C4;
+  border-radius: 20px;
+  font-family: 'Istok Web';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #FFE4C4;
+  color: #8A817C;
+  margin-top: 45px;
+}
+
+.form_but_vaccination{
+  background: #FFE4C4;
+  border-radius: 20px;
+
+  font-family: 'Istok Web';
+  font-size: 24px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #FFE4C4;
+  color: #8A817C;
+  margin-left: 20px;
+  margin-top: 45px;
+}
