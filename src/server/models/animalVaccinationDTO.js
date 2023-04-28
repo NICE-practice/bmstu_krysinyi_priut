@@ -1,6 +1,8 @@
 class AnimalVaccinationDTO {
   /** @type {number} */
   vaccinationId;
+  
+  animalVaccinationId;
 
   /** @type {string} */
   vaccinationName;
@@ -26,6 +28,7 @@ class AnimalVaccinationDTO {
       this.vaccinationId = vaccinationORM?.vaccinationId;
       this.vaccinationName = vaccinationORM?.vaccinationName;
       this.vaccinationDate = animalVaccinationORM?.vaccinationDate;
+	  this.animalVaccinationId = animalVaccinationORM?.animalVaccinationId;
     }
   }
 }
