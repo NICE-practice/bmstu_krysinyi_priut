@@ -30,6 +30,7 @@ const AddVaccinationModal = observer((props) => {
       arr.push(vaccinationItem);
       vaccination.setAddVaccination(arr);
     }
+    props.onModalClose(false);
   };
 
   return (
@@ -60,12 +61,6 @@ const AddVaccinationModal = observer((props) => {
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                 />
-                {/* <input */}
-                {/* className="form_text_data" */}
-                {/* type="text" */}
-                {/* name="telephone" */}
-                {/* required="required" */}
-                {/* /> */}
               </div>
             </div>
             <button className="form_but_vac" type="button" onClick={click}>
