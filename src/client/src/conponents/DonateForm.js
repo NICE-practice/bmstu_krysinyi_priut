@@ -13,7 +13,7 @@ export default function DonateForm(props) {
         props.func(true);
         console.log(item);
       } else {
-        alert("Пожалуста введите сумму пожертвования");
+        alert("Пожалуйста введите сумму пожертвования");
       }
     } catch (e) {
       alert(e.response.data.message);

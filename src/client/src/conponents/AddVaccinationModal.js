@@ -30,7 +30,6 @@ const AddVaccinationModal = observer((props) => {
       arr.push(vaccinationItem);
       vaccination.setAddVaccination(arr);
     }
-    props.onModalClose(false);
   };
 
   return (
@@ -45,6 +44,7 @@ const AddVaccinationModal = observer((props) => {
               <div className="input_block">
                 <div className="name_item">Название</div>
                 <input
+                  placeholder="Введите название прививки"
                   className="form_text_vac"
                   type="text"
                   name="name"
