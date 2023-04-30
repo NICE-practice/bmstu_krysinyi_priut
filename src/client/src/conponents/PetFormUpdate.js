@@ -4,11 +4,13 @@ import "../style/Pets.css";
 import { Context } from "../index";
 import close from "../img/close.svg";
 import { observer } from "mobx-react-lite";
+// import UpdateVaccinationModal from "./UpdateVaccinationModal";
 import { updatePet } from "../http/petsApi";
 import DatePicker from "react-datepicker";
 import { toJS } from "mobx";
 
 const PetFormUpdate = observer((props) => {
+  // const [modalVacUpdate, setModalVacUpdate] = useState(false);
   const [vacName, setVacName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [id, setId] = useState("");
@@ -48,6 +50,7 @@ const PetFormUpdate = observer((props) => {
 
   const updateAnimal = async () => {
     try {
+      // vaccination.setUpdateVaccination([]);
       let vacs = toJS(vaccination.updateVaccination);
       console.log(vacs);
       for (
@@ -123,7 +126,7 @@ const PetFormUpdate = observer((props) => {
       );
       console.log(item);
     } catch (e) {
-      alert(e.response.data.message);
+      alert("Такой вакцины не существует. Проверьте название вакцины.");
     }
   };
   const click = () => {
@@ -153,6 +156,7 @@ const PetFormUpdate = observer((props) => {
               />
               <div className="name_item">Возраст</div>
               <input
+                type="number"
                 placeholder={String(props.item.animalAge)}
                 className="form_text"
                 value={age}
@@ -167,11 +171,14 @@ const PetFormUpdate = observer((props) => {
                 onChange={(e) => setHistory(e.target.value)}
               ></textarea>
 
+              {/* <div className="name_item">Напишите сообщение</div> */}
+              {/* <textarea className="message_text" name="message"></textarea> */}
               <div className="block_vac">
                 {props.item.animalVaccinationsList
                   ? props.item.animalVaccinationsList.map((vac) => (
                       <div key={vac.animalVaccinationId} className="vac_line">
                         <div>
+                          {/* {setId(vac.animalVaccinationId)} */}
                           <div className="name_item">Название</div>
                           <input
                             placeholder={vac.vaccinationName}
@@ -189,7 +196,7 @@ const PetFormUpdate = observer((props) => {
                           <div className="name_item"> Дата</div>
 
                           <DatePicker
-                            placeholderText={String(vac.vaccinationDate)
+                            placeholderText={vac.vaccinationDate
                               .substring(0, 10)
                               .replaceAll("-", ".")}
                             className="form_text_data"

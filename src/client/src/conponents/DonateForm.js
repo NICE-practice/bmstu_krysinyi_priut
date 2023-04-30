@@ -8,9 +8,13 @@ export default function DonateForm(props) {
   const [sum, setSum] = useState("");
   const addDonate = async () => {
     try {
-      let item = await createDonation(fio, sum);
-      props.func(true);
-      console.log(item);
+      if (sum !== "") {
+        let item = await createDonation(fio, sum);
+        props.func(true);
+        console.log(item);
+      } else {
+        alert("Пожалуйста введите сумму пожертвования");
+      }
     } catch (e) {
       alert(e.response.data.message);
     }
@@ -34,6 +38,8 @@ export default function DonateForm(props) {
               <input
                 className="inputd"
                 placeholder="Введите сумму для пожертвования"
+                required="required"
+                type="number"
                 value={sum}
                 onChange={(e) => setSum(e.target.value)}
               />

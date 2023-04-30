@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { createPet } from "../http/petsApi";
+// import cat from "../img/catabout.jpg";
 import dog from "../img/dog.jpg";
 import close from "../img/close.svg";
 import "../style/Contact.css";
@@ -36,7 +37,7 @@ const AddPetModal = observer((props) => {
       );
       console.log(item);
     } catch (e) {
-      alert(e.response.data.message);
+      alert("Такой вакцины не существует. Проверьте название вакцины.");
     }
   };
   return (
@@ -67,7 +68,10 @@ const AddPetModal = observer((props) => {
                 <div>
                   <div className="name_item">Тип</div>
                   <input
+                    placeholder="Введите тип"
+                    pattern="[Dd]og|[Cc]at"
                     className="form_text_short"
+                    title="Пожалуйста введите cat или dog"
                     type="text"
                     name="name"
                     required="required"
@@ -78,7 +82,10 @@ const AddPetModal = observer((props) => {
                 <div>
                   <div className="name_item">Пол</div>
                   <input
+                    placeholder="Введите пол"
+                    pattern="м|ж"
                     className="form_text_short"
+                    title="Пожалуйста введите м(мужской) или ж(женский)"
                     type="text"
                     name="name"
                     required="required"
@@ -89,6 +96,7 @@ const AddPetModal = observer((props) => {
               </div>
               <div className="name_item">Имя</div>
               <input
+                placeholder="Введите имя животного"
                 className="form_text"
                 type="text"
                 name="name"
@@ -98,6 +106,7 @@ const AddPetModal = observer((props) => {
               />
               <div className="name_item">Порода</div>
               <input
+                placeholder="Введите породу животного"
                 className="form_text"
                 type="text"
                 name="telephone"
@@ -107,8 +116,9 @@ const AddPetModal = observer((props) => {
               />
               <div className="name_item">Возраст</div>
               <input
+                placeholder="Введите возраст животного"
                 className="form_text"
-                type="text"
+                type="number"
                 name="email"
                 required="required"
                 value={age}
@@ -116,6 +126,7 @@ const AddPetModal = observer((props) => {
               />
               <div className="name_item">Фото(вставьте ссылку на фото)</div>
               <input
+                placeholder="Введите ссылку на фото животного"
                 className="form_text"
                 type="text"
                 name="email"
@@ -125,7 +136,9 @@ const AddPetModal = observer((props) => {
               />
               <div className="name_item">История </div>
               <textarea
-                className="message_text_up"
+                placeholder="Введите историю животного"
+                className="message_text"
+                required="required"
                 name="message"
                 value={history}
                 onChange={(e) => setHistory(e.target.value)}

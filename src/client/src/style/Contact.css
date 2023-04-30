@@ -28,7 +28,7 @@
     border-width: 2px;
     border-style: solid;
     border-color:  #8A817C;
-    height : 200px;
+    height : 170px;
     width : 450px;
 }
 
@@ -55,6 +55,10 @@
     border-color:  #FFE4C4;
     background-color:  #FFE4C4;
     color: #BCB8B1;
+}
+
+.form_but:hover, .form_but:focus, .form_but:active {
+    opacity: 0.7;
 }
 
 .guruweba_example_form2{

@@ -266,6 +266,10 @@
 
     color: #8A817C;
 }
+
+.butpushdonate:hover, .butpushdonate:focus, .butpushdonate:active {
+    opacity: 0.7;
+}
 .donatemodal{
     width: 823px;
     height: 302px;

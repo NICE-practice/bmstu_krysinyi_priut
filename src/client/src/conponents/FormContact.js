@@ -28,6 +28,7 @@ export default function FormContact() {
       <form className="guruweba_example_form2" name="feedback">
         <div className="name_item">Имя</div>
         <input
+          placeholder="Введите имя"
           className="form_text"
           type="text"
           name="name"
@@ -37,15 +38,19 @@ export default function FormContact() {
         />
         <div className="name_item">Телефон</div>
         <input
+          placeholder="+7(___)___-__-__"
           className="form_text"
-          type="text"
+          type="tel"
           name="telephone"
           required="required"
+          title="+7 (123) 456-78-91"
+          pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
         <div className="name_item">Ваш email</div>
         <input
+          placeholder="Введите почту"
           className="form_text"
           type="email"
           name="email"
@@ -55,6 +60,7 @@ export default function FormContact() {
         />
         <div className="name_item">Предпочтительная форма связи </div>
         <input
+          placeholder="Введите предпочтительную форму связи"
           className="form_text"
           type="text"
           name="bestform"
@@ -64,7 +70,9 @@ export default function FormContact() {
         />
         <div className="name_item">Напишите сообщение</div>
         <textarea
+          placeholder="Введите текст сообщения"
           className="message_text"
+          required="required"
           name="message"
           value={messageText}
           onChange={(e) => setMessageText(e.target.value)}
