@@ -78,11 +78,19 @@
     font-weight: 700;
     font-size: 32px;
     line-height: 46px;
-
-    /* text2 */
-
     color: #8A817C;
+}
 
+.message_lanel_text{
+
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 46px;
+    color: #8A817C;
+    overflow: auto;
+    height: 170px;
 }
 
 .butpush{
@@ -122,6 +130,14 @@
     align-items: center;
     justify-content: center;
     }
+
+.pagespet{
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    margin-bottom: 50px;
+    margin-left: 230px;
+}
 
 .page, .current-page{
     display: flex;

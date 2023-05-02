@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import FormContact from "../conponents/FormContact";
 import HeaderContact from "../conponents/HeaderContact";
 import Persons from "../conponents/Persons";
 import "../style/Contact.css";
+import { Context } from "../index";
 
 export default function Contact() {
+  const { info } = useContext(Context);
   return (
     <div className="section_contact">
       <HeaderContact />
@@ -26,9 +28,7 @@ export default function Contact() {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="inf_text">
-              34 Street Name, City Name Here, United States
-            </p>
+            <p className="inf_text">{info.info.shelter_address}</p>
           </div>
           <div className="inf_line">
             <svg
@@ -45,7 +45,7 @@ export default function Contact() {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="inf_text">+1 242 4942 290</p>
+            <p className="inf_text"> {info.info.shelter_phone}</p>
           </div>
           <div className="inf_line">
             <svg
@@ -60,7 +60,7 @@ export default function Contact() {
               <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
             </svg>
 
-            <p className="inf_text">info@yourdomain.com</p>
+            <p className="inf_text">{info.info.shelter_email}</p>
           </div>
         </div>
       </div>

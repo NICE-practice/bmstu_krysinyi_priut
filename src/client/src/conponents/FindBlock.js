@@ -18,10 +18,13 @@ const FindBlock = observer(() => {
       alert(e);
     }
   };
-
-  if (age > 0) {
+  console.log("до", age);
+  if (age === 0 || age === "0") {
+    pet.setSelectedAge(null);
+  } else {
     pet.setSelectedAge(age);
   }
+  console.log("после", age);
   const chengeCheckbox1 = () => {
     setType1(!type1);
   };

@@ -246,7 +246,7 @@ color: #8A817C;
   border-radius: 10px 0px 0px 10px;
   background: #EEEEEE;
   width: 250px;
-  height: 35px;
+  height: 36px;
 }
 
 .iconclass{
@@ -392,7 +392,6 @@ border-radius: 10px;
 }
 
 .closeimg{
-margin-right: 10px;
 height: 55px;
 width: 55px;
 cursor: pointer;
@@ -520,7 +519,7 @@ margin-top: 45px;
 .form_but_vaccination{
   background: #FFE4C4;
   border-radius: 20px;
-
+  cursor: pointer;
   font-family: 'Istok Web';
   font-size: 24px;
   line-height: 35px;
