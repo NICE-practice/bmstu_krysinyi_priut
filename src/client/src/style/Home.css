@@ -288,7 +288,7 @@
 
 
 .donatemodaltext{
-    text-align: center;
+    margin-left: 80px;
     width: 715px;
     height: 100px;
     font-family: 'Itim';
@@ -321,7 +321,6 @@
 
 .modal_close{
     margin-top: 10px;
-    margin-right: 46px;
     align-self: flex-end;
 }
 
@@ -675,7 +674,7 @@ div#care {
     font-style: normal;
     font-weight: 600;
     font-size: 48px;
-    margin-left: 250px;
+    margin-left: 350px;
 }
 
 .subtitle_about{
@@ -684,14 +683,14 @@ div#care {
     width: 430px;
     font-family: Inter;
     font-style: normal;
-    margin-left: 250px;
+    margin-left: 350px;
 }
 
 .img_about{
     margin-top: 30px;
     height: 700px;
     width: 1200px;
-    margin-left: 200px;
+    margin-left: 100px;
 }
 
 .text_about{

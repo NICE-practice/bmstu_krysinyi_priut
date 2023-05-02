@@ -28,7 +28,9 @@ export default function MessageCard(messageItem) {
             <p>{item.messageItem.email}</p>
             <p>{item.messageItem.phone}</p>
           </div>
-          <div className="message_lanel">{item.messageItem.messageText}</div>
+          <div className="message_lanel">
+            <p className="message_lanel_text">{item.messageItem.messageText}</p>
+          </div>
           <div className="message_lanel">
             Предпочтительный способ связи:{" "}
             {item.messageItem.preferredContactMethod}

@@ -19,6 +19,7 @@ export default function FormContact() {
         false
       );
       console.log(item);
+      alert("Ваше сообщение отправлено");
     } catch (e) {
       alert(e.response.data.message);
     }

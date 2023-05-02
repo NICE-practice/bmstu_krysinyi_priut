@@ -13,6 +13,7 @@ const SliderPet = observer(() => {
   let pets = toJS(pet.pets);
   console.log(pets);
   let position = 0;
+
   const prevHandler = () => {
     console.log("prev");
     console.log(position);
@@ -43,12 +44,15 @@ const SliderPet = observer(() => {
       });
     }
   };
+  const onclick = () => {
+    window.location.assign("http://localhost:3000/pets");
+  };
   return (
     <div id="cats" className="cats">
       <h1 className="cat_title">Наши пушистики, которые ищут дом</h1>
       <div className="slider_content">
         <div className="arrow_cats" disabled={prev} onClick={prevHandler}>
-          <p>&larr;</p>
+          &larr;
         </div>
         <div className="cat_block" ref={slider}>
           <PetCard pet={pets[0]} />
@@ -62,11 +66,13 @@ const SliderPet = observer(() => {
           <PetCard pet={pets[8]} />
         </div>
         <div className="arrow_cats" disabled={next} onClick={nextHandler}>
-          <p>&rarr;</p>
+          &rarr;
         </div>
       </div>
 
-      <button className="cats_but">Наши животные</button>
+      <button className="cats_but" onClick={onclick}>
+        Наши животные
+      </button>
     </div>
   );
 });

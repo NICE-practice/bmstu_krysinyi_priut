@@ -59,6 +59,9 @@ const PetFormUpdate = observer((props) => {
         ++index
       ) {
         for (let i = 0; i < vacs.length; ++i) {
+          //  let len = vacs[i].vaccinationDate.length;
+          // let num =
+          // Number(String(vacs[i].vaccinationDate).substring(len - 1)) + 1;
           if (
             props.item.animalVaccinationsList[index].animalVaccinationId ===
             vacs[i].animalVaccinationId
